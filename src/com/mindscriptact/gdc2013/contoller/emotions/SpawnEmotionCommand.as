@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.emotions {
+import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
@@ -33,8 +34,10 @@ public class SpawnEmotionCommand extends PooledCommand {
 		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * spawnRadius;
 		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * spawnRadius;
 		
-		emotionData.vectorX = Math.random() * 5 + 2;
-		emotionData.vectorY = Math.random() * 5 + 2;
+		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
+		
+		emotionData.vectorX = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;
+		emotionData.vectorY = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;
 		
 		if (emotionData.x > heroConfig.startingXPos) {
 			emotionData.vectorX *= -1;

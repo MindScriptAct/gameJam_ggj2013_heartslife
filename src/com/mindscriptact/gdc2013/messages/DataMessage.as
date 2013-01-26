@@ -12,6 +12,7 @@ public class DataMessage {
 	static public const EMOTION_SPOWN:String = "emotionSpown";
 	static public const EMOTION_REMOVED:String = "emotionRemoved";
 	static public const HERO_HEART_CHANGED:String = "heroHeartChanged";
+	static public const All_EMOTIONS_REMOVED:String = "allEmotionsRemoved";
 	
 	
 }

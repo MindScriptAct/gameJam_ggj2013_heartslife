@@ -19,19 +19,30 @@ public class GameProcess extends Process {
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
 		
 		addHandler(ProcessMessage.START_TEST_IMAGE_MOVE, handleShowScreen);
+		
+		addTask(EmotionSpawnTask);
+		addTask(MoveHeroTask);
+		addTask(MoveEmotionsTask);
+		addTask(HeroCollideEmotionTask);
+		
+		disableTask(EmotionSpawnTask);
+		disableTask(MoveHeroTask);
+		disableTask(MoveEmotionsTask);
+		disableTask(HeroCollideEmotionTask);
+	
 	}
 	
 	private function handleShowScreen(screenName:String):void {
 		if (screenName == ScreenIds.GAME) {
-			addTask(EmotionSpawnTask);
-			addTask(MoveHeroTask);
-			addTask(MoveEmotionsTask);
-			addTask(HeroCollideEmotionTask);
+			enableTask(EmotionSpawnTask);
+			enableTask(MoveHeroTask);
+			enableTask(MoveEmotionsTask);
+			enableTask(HeroCollideEmotionTask);
 		} else {
-			removeTask(EmotionSpawnTask);
-			removeTask(MoveHeroTask);
-			removeTask(MoveEmotionsTask);
-			removeTask(HeroCollideEmotionTask);
+			disableTask(EmotionSpawnTask);
+			disableTask(MoveHeroTask);
+			disableTask(MoveEmotionsTask);
+			disableTask(HeroCollideEmotionTask);
 		}
 	}
 

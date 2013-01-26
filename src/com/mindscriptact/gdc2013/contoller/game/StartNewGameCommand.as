@@ -1,6 +1,7 @@
 package com.mindscriptact.gdc2013.contoller.game {
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.messages.Message;
+import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
 import flash.display.ShaderPrecision;
 import org.mvcexpress.mvc.Command;
@@ -14,9 +15,14 @@ public class StartNewGameCommand extends Command {
 	[Inject]
 	public var heroProxy:HeroProxy;
 	
+	[Inject]
+	public var emotionProxy:EmotionProxy;
+	
 	public function execute(blank:Object):void {
 		
 		heroProxy.setToDefault();
+		
+		emotionProxy.removeAll();
 		
 		
 		sendMessage(Message.SHOW_SCREEN, ScreenIds.GAME);

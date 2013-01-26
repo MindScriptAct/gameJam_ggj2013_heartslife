@@ -18,8 +18,11 @@ public class EmotionsConfigVO {
 	public var waveGrowRate:Number;
 	public var spawnRateStart:int;
 	
+	public var emotionMoveSpeeed:int;
+	public var emotionMoveRandom:int;
+	
 	public var spawnRadius:int;
-		
-		public var emotions:Vector.<EmotionVO> = new Vector.<EmotionVO>();
+	
+	public var emotions:Vector.<EmotionVO> = new Vector.<EmotionVO>();
 }
 }

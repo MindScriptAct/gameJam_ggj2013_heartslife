@@ -49,6 +49,7 @@ public class GameMediator extends Mediator {
 		
 		addHandler(DataMessage.EMOTION_SPOWN, handleEmotionSpawn);
 		addHandler(DataMessage.EMOTION_REMOVED, handleEmotionRemove);
+		addHandler(DataMessage.All_EMOTIONS_REMOVED, handleAllEmotionRemove);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
 	
@@ -61,6 +62,13 @@ public class GameMediator extends Mediator {
 		//addHandler(KeyMessage.KEY_ADD, handleKeyPress);
 		//addHandler(KeyMessage.KEY_SUBTRACT, handleKeyPress);
 	
+	}
+	
+	private function handleAllEmotionRemove(blank:Object):void {
+		while (emotionViews.length) {
+			var emotionSpawn:Image = emotionViews.pop();
+			view.removeChild(emotionSpawn);
+		}
 	}
 	
 	private function handleEmotionRemove(nr:int):void {

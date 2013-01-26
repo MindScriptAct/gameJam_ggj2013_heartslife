@@ -21,7 +21,7 @@ public class ConsumeEmotionCommand extends PooledCommand {
 	public var heroProxy:HeroProxy;
 	
 	public function execute(emotion:EmotionData):void {
-		trace("ConsumeEmotionCommand.execute > emotion : " + emotion);
+		//trace("ConsumeEmotionCommand.execute > emotion : " + emotion);
 		
 		heroProxy.changeHeart(emotionProxy.getEmotionStrength(emotion.emotionId));
 		

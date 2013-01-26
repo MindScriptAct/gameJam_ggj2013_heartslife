@@ -38,6 +38,11 @@
 		
 		<spawnRateStart>1000</spawnRateStart>
 		
+		
+		<emotionMoveSpeeed>5</emotionMoveSpeeed>
+		<emotionMoveRandom>2</emotionMoveRandom>
+		
+		
 		<emotions>
 			<emotion id="1" positive="true" strength="1" ></emotion>
 			<emotion id="2" positive="true" strength="2" ></emotion>
