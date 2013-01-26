@@ -31,7 +31,7 @@ public class Main extends Sprite {
 		CONFIG::debug {
 			checkClassStringConstants(Message, ViewMessage, DataMessage);
 			MvcExpressLogger.init(this.stage);
-			this.addChild(new Stats(100, 0, 0, false, true, true));
+			this.addChild(new Stats(100, 50, 0, true, true, true));
 		}
 		
 		// start

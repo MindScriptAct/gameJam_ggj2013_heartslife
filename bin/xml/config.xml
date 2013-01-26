@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <data>
 
-	<gameName>Game name...</gameName>
-	<heroSize>23</heroSize>
-	<speed>100</speed>
-	<debug>true</debug>
-
-
-	<itemList>
-		<item name="enemy1"
-			  speed="10"
-			  size="20">
-		</item>
-		<item name="enemy2"
-			  speed="20"
-			  size="40">
-		</item>
-	</itemList>
+	<gameConfig>
+		<screanWidth>1280</screanWidth>
+		<screanHeight>960</screanHeight>
+	</gameConfig>
+	
+	<heroConfig>
+		<size>64</size>
+		<startingXPos>480</startingXPos>
+		<startingYPos>480</startingYPos>
+		<moveSpeed>10.0</moveSpeed>
+		
+		<moveRadius>480</moveRadius>
+		
+	
+	</heroConfig>
+	
+	<emotionConfig>
+		<size>64</size>
+		
+		<spawnRateStarting>1</spawnRateStarting>
+		<spawnRateChange>0.5</spawnRateChange>
+		
+		<waveProgressStarting>0</waveProgressStarting>  <!-- kaip greit 'groja' bangavimas. -->
+		<waveProgressSpeed>0.2</waveProgressSpeed>  <!-- kaip greit 'groja' bangavimas. -->
+		<waveGrowRate>0.2</waveGrowRate>  <!-- Kaip greit pradeda banguoti. -->
+		
+		<spawnRadius>540</spawnRadius>
+		
+		<emotions>
+			<emotion id="1" positive="true" strength="1" ></emotion>
+			<emotion id="2" positive="true" strength="2" ></emotion>
+			<emotion id="3" positive="true" strength="4" ></emotion>
+			
+			<emotion id="4" positive="false" strength="1" ></emotion>
+			<emotion id="5" positive="false" strength="2" ></emotion>
+			<emotion id="6" positive="false" strength="4" ></emotion>
+		</emotions>
+		
+	</emotionConfig>
 
 </data>

@@ -9,6 +9,16 @@
 	
 	<path id="picDir" url="pics/">
 		<file assetId="color_test" fileName="color_test.png" permanent="true"/>
+		
+		<file assetId="hero" fileName="hero.png" permanent="true"/>
+		
+		<file assetId="emotion_1" fileName="emotion_p1.png" permanent="true"/>
+		<file assetId="emotion_2" fileName="emotion_p2.png" permanent="true"/>
+		<file assetId="emotion_3" fileName="emotion_p3.png" permanent="true"/>
+		
+		<file assetId="emotion_4" fileName="emotion_n1.png" permanent="true"/>
+		<file assetId="emotion_5" fileName="emotion_n2.png" permanent="true"/>
+		<file assetId="emotion_6" fileName="emotion_n3.png" permanent="true"/>
 	</path>
 	
 	

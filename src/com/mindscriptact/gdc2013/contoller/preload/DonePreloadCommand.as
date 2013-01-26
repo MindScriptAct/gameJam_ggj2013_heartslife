@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.preload {
+import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.messages.KeyMessage;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.messages.ProcessMessage;
@@ -23,10 +24,10 @@ public class DonePreloadCommand extends Command {
 		//keyboardProxy.registerMessageSendOnPress(Keyboard.LEFT, KeyMessage.KEY_LEFT);
 		//keyboardProxy.registerMessageSendOnPress(Keyboard.RIGHT, KeyMessage.KEY_RIGHT);
 		
-		keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_SUBTRACT, KeyMessage.KEY_SUBTRACT);
-		keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_ADD, KeyMessage.KEY_ADD);
+		//keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_SUBTRACT, KeyMessage.KEY_SUBTRACT);
+		//keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_ADD, KeyMessage.KEY_ADD);
 		
-		sendMessage(ProcessMessage.START_TEST_IMAGE_MOVE);
+		sendMessage(Message.SHOW_SCREEN, ScreenIds.START);
 	}
 
 }

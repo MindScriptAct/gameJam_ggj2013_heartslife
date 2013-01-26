@@ -7,6 +7,7 @@ import com.mindscriptact.assetLibrary.event.AssetEvent;
 import com.mindscriptact.gdc2013.constants.AssetIds;
 import com.mindscriptact.gdc2013.constants.PreloadSteps;
 import com.mindscriptact.gdc2013.messages.DataMessage;
+import com.mindscriptact.gdc2013.model.config.data.AllConfigsVO;
 import com.mindscriptact.gdc2013.model.config.data.GameConfigVO;
 import com.mindscriptact.utils.xml.XmlHelper;
 import org.mvcexpress.mvc.Proxy;
@@ -72,10 +73,9 @@ public class PreloadProxy extends Proxy {
 		//trace("PreloadProxy.handleXmlAsset > asset : " + asset);
 		sendMessage(DataMessage.LOAD_STEP_REPORT, "Parsing configs...");
 		
-		var config:GameConfigVO = XmlHelper.fillObjectWithXml(GameConfigVO, asset.getXml()) as GameConfigVO;
+		var config:AllConfigsVO = XmlHelper.fillObjectWithXml(AllConfigsVO, asset.getXml()) as AllConfigsVO;
 		
-		
-		// use config..
+		sendMessage(DataMessage.CONFIG_PARSED, config);
 		
 		sendMessage(DataMessage.PRELOAD_DONE);
 	}
