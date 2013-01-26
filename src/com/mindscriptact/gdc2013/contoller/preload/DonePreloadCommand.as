@@ -17,6 +17,10 @@ public class DonePreloadCommand extends Command {
 	public var keyboardProxy:KeyboardProxy;
 	
 	public function execute(blank:Object):void {
+		
+		
+		sendMessage(Message.INIT_GAME_ELEMENT);
+		
 		sendMessage(Message.HIDE_LOADER);
 		
 		//keyboardProxy.registerMessageSendOnPress(Keyboard.UP, KeyMessage.KEY_UP);

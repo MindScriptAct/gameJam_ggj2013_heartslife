@@ -11,7 +11,7 @@ public class AllConfigsVO {
 	
 	public var heroConfig:HeroConfigVO;
 	
-	public var emotionConfig:EmotionConfigVO;
+	public var emotionConfig:EmotionsConfigVO;
 
 }
 }

@@ -8,9 +8,10 @@
 	
 	<heroConfig>
 		<size>64</size>
+		<assetSize>80</assetSize>
 		<startingXPos>480</startingXPos>
 		<startingYPos>480</startingYPos>
-		<moveSpeed>10.0</moveSpeed>
+		<moveSpeed>7</moveSpeed>
 		
 		<moveRadius>480</moveRadius>
 		
@@ -19,6 +20,7 @@
 	
 	<emotionConfig>
 		<size>64</size>
+		<assetSize>80</assetSize>
 		
 		<spawnRateStarting>1</spawnRateStarting>
 		<spawnRateChange>0.5</spawnRateChange>

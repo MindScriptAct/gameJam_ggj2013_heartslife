@@ -8,7 +8,7 @@
 	</path>
 	
 	<path id="picDir" url="pics/">
-		<file assetId="color_test" fileName="color_test.png" permanent="true"/>
+		<!--<file assetId="color_test" fileName="color_test.png" permanent="true"/>-->
 		
 		<file assetId="hero" fileName="hero.png" permanent="true"/>
 		

@@ -6,6 +6,7 @@ import com.mindscriptact.assetLibrary.assets.XMLAsset;
 import com.mindscriptact.assetLibrary.event.AssetEvent;
 import com.mindscriptact.gdc2013.constants.AssetIds;
 import com.mindscriptact.gdc2013.constants.PreloadSteps;
+import com.mindscriptact.gdc2013.constants.ProvideId;
 import com.mindscriptact.gdc2013.messages.DataMessage;
 import com.mindscriptact.gdc2013.model.config.data.AllConfigsVO;
 import com.mindscriptact.gdc2013.model.config.data.GameConfigVO;
@@ -76,6 +77,10 @@ public class PreloadProxy extends Proxy {
 		var config:AllConfigsVO = XmlHelper.fillObjectWithXml(AllConfigsVO, asset.getXml()) as AllConfigsVO;
 		
 		sendMessage(DataMessage.CONFIG_PARSED, config);
+		
+		provide(config.gameConfig, ProvideId.GAME_CONFIG);
+		provide(config.heroConfig, ProvideId.HERO_CONFIG);
+		provide(config.emotionConfig, ProvideId.EMOTION_CONFIG);
 		
 		sendMessage(DataMessage.PRELOAD_DONE);
 	}

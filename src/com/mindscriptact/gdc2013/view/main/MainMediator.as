@@ -1,9 +1,16 @@
 package com.mindscriptact.gdc2013.view.main {
+import com.bit101.components.PushButton;
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.Main;
 import com.mindscriptact.gdc2013.messages.Message;
+import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
+import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
+import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
+import com.mindscriptact.gdc2013.model.hero.HeroProxy;
 import com.mindscriptact.gdc2013.view.preload.PreloadView;
+import flash.display.Shape;
 import flash.display.Sprite;
+import flash.events.Event;
 import org.mvcexpress.mvc.Mediator;
 
 /**
@@ -13,6 +20,7 @@ import org.mvcexpress.mvc.Mediator;
 public class MainMediator extends Mediator {
 	private var loader:PreloadView;
 	private var screen:Sprite;
+	private var debugSprite:Sprite;
 	
 	[Inject]
 	public var view:Main;
@@ -22,6 +30,46 @@ public class MainMediator extends Mediator {
 		addHandler(Message.HIDE_LOADER, handleHideLoader);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
+		
+		CONFIG::debug {
+			debugSprite = new Sprite();
+			view.addChild(debugSprite);
+			
+			addHandler(Message.INIT_GAME_ELEMENT, handleInitDebugShow);
+			
+			new PushButton(debugSprite, 1100, 800, "spawnEmotion", handleSpawn);
+		}
+	}
+	
+	CONFIG::debug
+	private function handleSpawn(event:Event):void {
+		sendMessage(Message.SPAWN_EMOTION);
+	}
+	
+	CONFIG::debug
+	private function handleInitDebugShow(blank:Object):void {
+		var heroProxy:HeroProxy = proxyMap.getProxy(HeroProxy) as HeroProxy;
+		var heroConfig:HeroConfigVO = heroProxy.getHeroConfig();
+		
+		var emotionProxy:EmotionProxy = proxyMap.getProxy(EmotionProxy) as EmotionProxy;
+		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
+		
+		var circle:Shape = new Shape();
+		circle.graphics.lineStyle(0.1, 0xFF0000);
+		circle.graphics.drawCircle(0, 0, heroConfig.moveRadius);
+		circle.graphics.endFill();
+		debugSprite.addChild(circle);
+		circle.x = heroConfig.startingXPos;
+		circle.y = heroConfig.startingYPos;
+		
+		circle = new Shape();
+		circle.graphics.lineStyle(0.1, 0x8000FF);
+		circle.graphics.drawCircle(0, 0, emotionConfig.spawnRadius);
+		circle.graphics.endFill();
+		debugSprite.addChild(circle);
+		circle.x = heroConfig.startingXPos;
+		circle.y = heroConfig.startingYPos;
+	
 	}
 	
 	override public function onRemove():void {
@@ -50,6 +98,10 @@ public class MainMediator extends Mediator {
 		if (screen) {
 			view.addChild(screen);
 			mediatorMap.mediate(screen);
+		}
+		
+		CONFIG::debug {
+			debugSprite.visible = screenName == ScreenIds.GAME;
 		}
 	}
 	

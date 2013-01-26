@@ -1,5 +1,8 @@
 package com.mindscriptact.gdc2013.engine {
-import com.mindscriptact.gdc2013.engine.tasks.MoveTestImageTask;
+import com.mindscriptact.gdc2013.constants.ScreenIds;
+import com.mindscriptact.gdc2013.engine.tasks.MoveEmotionsTask;
+import com.mindscriptact.gdc2013.engine.tasks.MoveHeroTask;
+import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.messages.ProcessMessage;
 import org.mvcexpress.live.Process;
 
@@ -10,11 +13,20 @@ import org.mvcexpress.live.Process;
 public class GameProcess extends Process {
 	
 	override protected function onRegister():void {
-		addHandler(ProcessMessage.START_TEST_IMAGE_MOVE, handleStartTestImageMove);
+		
+		addHandler(Message.SHOW_SCREEN, handleShowScreen);
+		
+		addHandler(ProcessMessage.START_TEST_IMAGE_MOVE, handleShowScreen);
 	}
 	
-	private function handleStartTestImageMove(blank:Object):void {
-		addTask(MoveTestImageTask);
+	private function handleShowScreen(screenName:String):void {
+		if (screenName == ScreenIds.GAME) {
+			addTask(MoveHeroTask);
+			addTask(MoveEmotionsTask);
+		} else {
+			removeTask(MoveHeroTask);
+			removeTask(MoveEmotionsTask);
+		}
 	}
 
 }

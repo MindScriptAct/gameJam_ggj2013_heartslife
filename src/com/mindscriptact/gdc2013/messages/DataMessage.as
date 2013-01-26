@@ -9,6 +9,7 @@ public class DataMessage {
 	static public const PRELOAD_DONE:String = "preloadDone";
 	static public const CONFIG_PARSED:String = "configParsed";
 	static public const HERO_POSITON_SET:String = "heroPositonSet";
+	static public const EMOTION_SPOWN:String = "emotionSpown";
 	
 	
 }

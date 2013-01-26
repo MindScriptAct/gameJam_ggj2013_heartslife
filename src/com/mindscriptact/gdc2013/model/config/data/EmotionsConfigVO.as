@@ -4,9 +4,10 @@ package com.mindscriptact.gdc2013.model.config.data {
  * COMMENT
  * @author Deril
  */
-public class EmotionConfigVO {
+public class EmotionsConfigVO {
 	
 	public var size:int;
+	public var assetSize:int;
 	
 	public var spawnRateStarting:Number;
 	public var spawnRateChange:Number;
