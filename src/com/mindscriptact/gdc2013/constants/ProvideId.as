@@ -17,6 +17,7 @@ public class ProvideId {
 	static public const EMOTION_VIEWS:String = "elementViews";
 	static public const EMOTION_DATAS:String = "emotionDatas";
 	static public const HERO_DATA:String = "heroData";
+	static public const EMOTIONS_INFO:String = "emotionsData";
 
 }
 }

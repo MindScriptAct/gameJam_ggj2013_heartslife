@@ -1,5 +1,6 @@
 package com.mindscriptact.gdc2013.engine {
 import com.mindscriptact.gdc2013.constants.ScreenIds;
+import com.mindscriptact.gdc2013.engine.tasks.EmotionSpawnTask;
 import com.mindscriptact.gdc2013.engine.tasks.MoveEmotionsTask;
 import com.mindscriptact.gdc2013.engine.tasks.MoveHeroTask;
 import com.mindscriptact.gdc2013.messages.Message;
@@ -21,9 +22,11 @@ public class GameProcess extends Process {
 	
 	private function handleShowScreen(screenName:String):void {
 		if (screenName == ScreenIds.GAME) {
+			addTask(EmotionSpawnTask);
 			addTask(MoveHeroTask);
 			addTask(MoveEmotionsTask);
 		} else {
+			removeTask(EmotionSpawnTask);
 			removeTask(MoveHeroTask);
 			removeTask(MoveEmotionsTask);
 		}

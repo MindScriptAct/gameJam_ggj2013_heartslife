@@ -31,6 +31,8 @@
 		
 		<spawnRadius>540</spawnRadius>
 		
+		<spawnRateStart>1000</spawnRateStart>
+		
 		<emotions>
 			<emotion id="1" positive="true" strength="1" ></emotion>
 			<emotion id="2" positive="true" strength="2" ></emotion>

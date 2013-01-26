@@ -14,7 +14,9 @@ public class EmotionsConfigVO {
 	
 	public var waveProgressStarting:Number;
 	public var waveProgressSpeed:Number;
+	
 	public var waveGrowRate:Number;
+	public var spawnRateStart:int;
 	
 	public var spawnRadius:int;
 		
