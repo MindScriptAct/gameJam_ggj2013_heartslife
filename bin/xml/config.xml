@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data>
+
+	<gameName>Game name...</gameName>
+	<heroSize>23</heroSize>
+	<speed>100</speed>
+	<debug>true</debug>
+
+
+	<itemList>
+		<item name="enemy1"
+			  speed="10"
+			  size="20">
+		</item>
+		<item name="enemy2"
+			  speed="20"
+			  size="40">
+		</item>
+	</itemList>
+
+</data>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<data>
+	
+	
+	
+	<path id="xmlDir" url="xml/">
+		<file assetId="configXml" fileName="config.xml"/>
+	</path>
+	
+	<path id="picDir" url="pics/">
+		<file assetId="color_test" fileName="color_test.png" permanent="true"/>
+	</path>
+	
+	
+	
+	
+	<!-- EXAMPLE	
+	<path id="testXMLDir" url="assets/xmlTest/">
+		<file assetId="test5" fileName="test5.swf"/>
+		<file assetId="test6" fileName="test6.swf" permanent="true" customExtention=".swf" />
+	</path>
+	
+	<path id="blankDir" url="assets/blank/"/>
+
+	<file assetId="badFile" fileName="badFile.swf" pathId="blankDir"/>
+	
+	
+	<path id="remoteDir" url="temp/remoteDir/">
+		<file assetId="RemoteTest" fileName="RemoteTest.swf" urlParams="?_cv=1234567" />
+	</path>	
+	
+	-->
+	
+	
+	
+</data>
