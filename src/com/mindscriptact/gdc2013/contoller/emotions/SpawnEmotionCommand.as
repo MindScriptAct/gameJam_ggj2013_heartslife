@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.emotions {
+import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
@@ -22,20 +23,23 @@ public class SpawnEmotionCommand extends PooledCommand {
 		var id:int = Math.floor(Math.random() * 6) + 1;
 		var emotionData:EmotionData = new EmotionData(id);
 		
-		var angle:Number = Math.random() * Math.PI;
+		var angle:Number = Math.random() * Math.PI * 2;
+		//var angle:Number = 0.5 * Math.PI;
+		
+		var heroConfig:HeroConfigVO = heroProxy.getHeroConfig();
 		
 		var spawnRadius:int = emotionProxy.getEnemySpawnRadius() - 2
 		
-		emotionData.x = heroProxy.getHeroPosX() + Math.sin(angle) * spawnRadius;
-		emotionData.y = heroProxy.getHeroPosY() + Math.cos(angle) * spawnRadius;
+		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * spawnRadius;
+		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * spawnRadius;
 		
 		emotionData.vectorX = Math.random() * 5 + 2;
 		emotionData.vectorY = Math.random() * 5 + 2;
 		
-		if (emotionData.x > heroProxy.getHeroPosX()) {
+		if (emotionData.x > heroConfig.startingXPos) {
 			emotionData.vectorX *= -1;
 		}
-		if (emotionData.y > heroProxy.getHeroPosY()) {
+		if (emotionData.y > heroConfig.startingYPos) {
 			emotionData.vectorY *= -1;
 		}
 		emotionProxy.addEmotion(emotionData);

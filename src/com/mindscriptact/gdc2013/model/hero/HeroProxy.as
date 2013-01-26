@@ -16,11 +16,10 @@ public class HeroProxy extends Proxy {
 	
 	public function HeroProxy(heroConfig:HeroConfigVO) {
 		this.heroConfig = heroConfig;
-	
 	}
 	
 	override protected function onRegister():void {
-		hositionToDefault();
+		setToDefault();
 		
 		provide(heroData, ProvideId.HERO_DATA);
 	}
@@ -29,11 +28,14 @@ public class HeroProxy extends Proxy {
 	
 	}
 	
-	public function hositionToDefault():void {
+	public function setToDefault():void {
 		heroData.x = heroConfig.startingXPos;
 		heroData.y = heroConfig.startingYPos;
 		
-		sendMessage(DataMessage.HERO_POSITON_SET);
+		heroData.heartState = 0;
+		
+		sendMessage(DataMessage.HERO_POSITON_CHANGED);
+		sendMessage(DataMessage.HERO_HEART_CHANGED, heroData.heartState);
 	}
 	
 	public function getAssetSize():int {
@@ -50,6 +52,15 @@ public class HeroProxy extends Proxy {
 	
 	public function getHeroConfig():HeroConfigVO {
 		return heroConfig
+	}
+	
+	public function changeHeart(heartValue:int):void {
+		heroData.heartState += heartValue;
+		sendMessage(DataMessage.HERO_HEART_CHANGED, heroData.heartState);
+	}
+	
+	public function getHeartState():int {
+		return heroData.heartState;
 	}
 }
 }

@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.setup {
+import com.mindscriptact.gdc2013.contoller.emotions.ConsumeEmotionCommand;
 import com.mindscriptact.gdc2013.contoller.emotions.SpawnEmotionCommand;
 import com.mindscriptact.gdc2013.contoller.game.StartNewGameCommand;
 import com.mindscriptact.gdc2013.contoller.preload.DonePreloadCommand;
@@ -25,6 +26,7 @@ public class SetupControllerCommand extends Command {
 		commandMap.map(ViewMessage.PRESS_START_GAME, StartNewGameCommand);
 		
 		commandMap.map(Message.SPAWN_EMOTION, SpawnEmotionCommand);
+		commandMap.map(Message.CONSUME_EMOTION, ConsumeEmotionCommand);
 	
 	}
 

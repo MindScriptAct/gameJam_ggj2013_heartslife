@@ -16,7 +16,8 @@ public class StartNewGameCommand extends Command {
 	
 	public function execute(blank:Object):void {
 		
-		heroProxy.hositionToDefault();
+		heroProxy.setToDefault();
+		
 		
 		sendMessage(Message.SHOW_SCREEN, ScreenIds.GAME);
 	

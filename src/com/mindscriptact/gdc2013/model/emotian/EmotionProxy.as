@@ -2,6 +2,7 @@ package com.mindscriptact.gdc2013.model.emotian {
 import com.mindscriptact.gdc2013.constants.ProvideId;
 import com.mindscriptact.gdc2013.messages.DataMessage;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
+import flash.utils.Dictionary;
 import org.mvcexpress.mvc.Proxy;
 
 /**
@@ -16,9 +17,18 @@ public class EmotionProxy extends Proxy {
 	
 	private var emotionsData:EmotionsInfo = new EmotionsInfo();
 	
+	private var emotionStrength:Dictionary = new Dictionary();
 	
 	public function EmotionProxy(emotionConfig:EmotionsConfigVO) {
 		this.emotionConfig = emotionConfig;
+		
+		for (var i:int = 0; i < emotionConfig.emotions.length; i++) {
+			var strength:int = emotionConfig.emotions[i].strength;
+			if (!emotionConfig.emotions[i].positive) {
+				strength *= -1;
+			}
+			emotionStrength[emotionConfig.emotions[i].id] = strength;
+		}
 	
 	}
 	
@@ -34,6 +44,20 @@ public class EmotionProxy extends Proxy {
 	
 	public function getEnemySpawnRadius():int {
 		return emotionConfig.spawnRadius;
+	}
+	
+	public function removeEmotion(emotion:EmotionData):void {
+		for (var i:int = 0; i < emotionDatas.length; i++) {
+			if (emotion == emotionDatas[i]) {
+				emotionDatas.splice(i, 1);
+				sendMessage(DataMessage.EMOTION_REMOVED, i);
+				break;
+			}
+		}
+	}
+	
+	public function getEmotionStrength(emotionId:int):int {
+		return emotionStrength[emotionId];
 	}
 	
 	override protected function onRegister():void {

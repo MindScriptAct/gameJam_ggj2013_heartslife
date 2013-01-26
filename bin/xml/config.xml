@@ -8,10 +8,15 @@
 	
 	<heroConfig>
 		<size>64</size>
+		
 		<assetSize>80</assetSize>
+		
 		<startingXPos>480</startingXPos>
 		<startingYPos>480</startingYPos>
+		
 		<moveSpeed>7</moveSpeed>
+		
+		<life>20</life>
 		
 		<moveRadius>480</moveRadius>
 		

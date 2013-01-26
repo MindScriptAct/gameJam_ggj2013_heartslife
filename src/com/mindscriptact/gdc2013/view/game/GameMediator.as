@@ -29,7 +29,8 @@ public class GameMediator extends Mediator {
 	private var emotionProxy:EmotionProxy;
 	private var emotionTextures:Dictionary = new Dictionary();
 	private var emotionViews:Vector.<Image> = new Vector.<Image>()
-	private var emotionSize:int;;
+	private var emotionSize:int;
+	;
 	//private var testImage:Image;
 	
 	[Inject]
@@ -44,9 +45,10 @@ public class GameMediator extends Mediator {
 		
 		addHandler(Message.INIT_GAME_ELEMENT, handleInitGameScreen);
 		
-		addHandler(DataMessage.HERO_POSITON_SET, handleHeroPositionSet);
+		addHandler(DataMessage.HERO_POSITON_CHANGED, handleHeroPositionSet);
 		
 		addHandler(DataMessage.EMOTION_SPOWN, handleEmotionSpawn);
+		addHandler(DataMessage.EMOTION_REMOVED, handleEmotionRemove);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
 	
@@ -59,6 +61,12 @@ public class GameMediator extends Mediator {
 		//addHandler(KeyMessage.KEY_ADD, handleKeyPress);
 		//addHandler(KeyMessage.KEY_SUBTRACT, handleKeyPress);
 	
+	}
+	
+	private function handleEmotionRemove(nr:int):void {
+		var emotionSpawn:Image = emotionViews[nr];
+		view.removeChild(emotionSpawn);
+		emotionViews.splice(nr, 1);
 	}
 	
 	private function handleEmotionSpawn(emotionData:EmotionData):void {

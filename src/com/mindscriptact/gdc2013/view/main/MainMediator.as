@@ -1,7 +1,9 @@
 package com.mindscriptact.gdc2013.view.main {
+import com.bit101.components.Label;
 import com.bit101.components.PushButton;
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.Main;
+import com.mindscriptact.gdc2013.messages.DataMessage;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
@@ -22,6 +24,9 @@ public class MainMediator extends Mediator {
 	private var screen:Sprite;
 	private var debugSprite:Sprite;
 	
+	CONFIG::debug
+	private var heartTestlabel:Label;
+	
 	[Inject]
 	public var view:Main;
 	
@@ -37,8 +42,17 @@ public class MainMediator extends Mediator {
 			
 			addHandler(Message.INIT_GAME_ELEMENT, handleInitDebugShow);
 			
+			addHandler(DataMessage.HERO_HEART_CHANGED, handleHeroHeartChange);
+			
 			new PushButton(debugSprite, 1100, 800, "spawnEmotion", handleSpawn);
+			
+			heartTestlabel = new Label(debugSprite, 1100, 400, "-");
 		}
+	}
+	
+	CONFIG::debug
+	private function handleHeroHeartChange(heartStat:int):void {
+		heartTestlabel.text = String(heartStat);
 	}
 	
 	CONFIG::debug
