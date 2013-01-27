@@ -11,14 +11,14 @@
 		
 		<assetSize>80</assetSize>
 		
-		<startingXPos>480</startingXPos>
+		<startingXPos>500</startingXPos>
 		<startingYPos>480</startingYPos>
 		
 		<moveSpeed>7</moveSpeed>
 		
 		<life>20</life>
 		
-		<moveRadius>480</moveRadius>
+		<moveRadius>470</moveRadius>
 		
 	
 	</heroConfig>
@@ -42,15 +42,16 @@
 		<emotionMoveSpeeed>3</emotionMoveSpeeed>
 		<emotionMoveRandom>2</emotionMoveRandom>
 		
+		<penaltyPercentage>0.1</penaltyPercentage>
 		
 		<emotions>
-			<emotion id="1" positive="true" strength="1" ></emotion>
-			<emotion id="2" positive="true" strength="2" ></emotion>
-			<emotion id="3" positive="true" strength="4" ></emotion>
+			<emotion id="1" positive="true" strength="1" score="100"></emotion>
+			<emotion id="2" positive="true" strength="2" score="200"></emotion>
+			<emotion id="3" positive="true" strength="4" score="400"></emotion>
 			
-			<emotion id="4" positive="false" strength="1" ></emotion>
-			<emotion id="5" positive="false" strength="2" ></emotion>
-			<emotion id="6" positive="false" strength="4" ></emotion>
+			<emotion id="4" positive="false" strength="1" score="100"></emotion>
+			<emotion id="5" positive="false" strength="2" score="200"></emotion>
+			<emotion id="6" positive="false" strength="4" score="400"></emotion>
 		</emotions>
 		
 	</emotionConfig>

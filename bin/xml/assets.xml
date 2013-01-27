@@ -9,7 +9,7 @@
 	
 	<path id="picDir" url="pics/">
 		
-		<file assetId="background" fileName="background.png" permanent="true"/>
+		<file assetId="background" fileName="background2.png" permanent="true"/>
 		
 		<file assetId="hero" fileName="hero.png" permanent="true"/>
 		

@@ -18,6 +18,7 @@ public class EmotionProxy extends Proxy {
 	private var emotionsData:EmotionsInfo = new EmotionsInfo();
 	
 	private var emotionStrength:Dictionary = new Dictionary();
+	private var emotionScore:Dictionary = new Dictionary();
 	
 	public function EmotionProxy(emotionConfig:EmotionsConfigVO) {
 		this.emotionConfig = emotionConfig;
@@ -28,6 +29,7 @@ public class EmotionProxy extends Proxy {
 				strength *= -1;
 			}
 			emotionStrength[emotionConfig.emotions[i].id] = strength;
+			emotionScore[emotionConfig.emotions[i].id] = emotionConfig.emotions[i].score;
 		}
 	
 	}
@@ -63,6 +65,14 @@ public class EmotionProxy extends Proxy {
 	public function removeAll():void {
 		emotionDatas.length = 0;
 		sendMessage(DataMessage.All_EMOTIONS_REMOVED);
+	}
+	
+	public function getEmotionScore(emotionId:int):int {
+		return emotionScore[emotionId];
+	}
+	
+	public function getPenaltyPercentage():Number {
+		return emotionConfig.penaltyPercentage;
 	}
 	
 	override protected function onRegister():void {

@@ -4,6 +4,7 @@ import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
+import com.mindscriptact.gdc2013.model.game.GameProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
 import org.mvcexpress.mvc.Command;
 import org.mvcexpress.mvc.PooledCommand;
@@ -20,6 +21,9 @@ public class ConsumeEmotionCommand extends PooledCommand {
 	[Inject]
 	public var heroProxy:HeroProxy;
 	
+	[Inject]
+	public var gameProxy:GameProxy;
+	
 	public function execute(emotion:EmotionData):void {
 		//trace("ConsumeEmotionCommand.execute > emotion : " + emotion);
 		
@@ -29,6 +33,8 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		
 		var life:int = heroProxy.getHeroConfig().life;
 		
+		gameProxy.increaseScore(emotionProxy.getEmotionScore(emotion.emotionId));
+		
 		if (heartState >= life) {
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
@@ -36,6 +42,7 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		if (heartState <= -life) {
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
+		
 		
 		emotionProxy.removeEmotion(emotion);
 	

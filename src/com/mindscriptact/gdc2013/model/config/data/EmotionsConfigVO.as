@@ -23,6 +23,8 @@ public class EmotionsConfigVO {
 	
 	public var spawnRadius:int;
 	
+	public var penaltyPercentage:Number;
+
 	public var emotions:Vector.<EmotionVO> = new Vector.<EmotionVO>();
 }
 }

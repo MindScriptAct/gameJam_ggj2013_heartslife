@@ -13,6 +13,7 @@ public class DataMessage {
 	static public const EMOTION_REMOVED:String = "emotionRemoved";
 	static public const HERO_HEART_CHANGED:String = "heroHeartChanged";
 	static public const All_EMOTIONS_REMOVED:String = "allEmotionsRemoved";
+	static public const SCORE_CHANGE:String = "scoreChange";
 	
 	
 }

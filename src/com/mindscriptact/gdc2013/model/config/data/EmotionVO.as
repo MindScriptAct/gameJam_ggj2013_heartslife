@@ -9,5 +9,7 @@ public class EmotionVO {
 	public var id:int;
 	public var positive:Boolean;
 	public var strength:int;
+	
+	public var score:int;
 }
 }

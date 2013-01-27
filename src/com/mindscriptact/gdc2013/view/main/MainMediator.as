@@ -1,6 +1,9 @@
 package com.mindscriptact.gdc2013.view.main {
 import com.bit101.components.Label;
 import com.bit101.components.PushButton;
+import com.mindscriptact.assetLibrary.AssetLibrary;
+import com.mindscriptact.assetLibrary.assets.PICAsset;
+import com.mindscriptact.gdc2013.constants.AssetIds;
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.Main;
 import com.mindscriptact.gdc2013.messages.DataMessage;
@@ -11,6 +14,7 @@ import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
 import com.mindscriptact.gdc2013.view.main.elemets.CardioChart;
 import com.mindscriptact.gdc2013.view.preload.PreloadView;
+import flash.display.Bitmap;
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
@@ -25,8 +29,8 @@ public class MainMediator extends Mediator {
 	private var screen:Sprite;
 	private var debugSprite:Sprite;
 	
-	CONFIG::debug
-	private var heartTestlabel:Label;
+	//CONFIG::debug
+	//private var heartTestlabel:Label;
 	
 	private var uiSprite:Sprite;
 	private var cardio:CardioChart;
@@ -42,6 +46,13 @@ public class MainMediator extends Mediator {
 		
 		uiSprite = new Sprite();
 		view.addChild(uiSprite);
+		
+		uiSprite.mouseChildren = false;
+		uiSprite.mouseEnabled = false;
+		
+		//AssetLibrary.sendAssetToFunction(AssetIds.BACKGROUND, handleBgPic);
+		//var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		//
 		
 		cardio = new CardioChart(160, 515, 20, 0xFFFFFF, 50);
 		uiSprite.addChild(cardio);
@@ -65,67 +76,75 @@ public class MainMediator extends Mediator {
 		//
 		//cardio.delay = 300;
 		//cardio.x = 1040;
-		//cardio.y = 400 + 200;		
+		//cardio.y = 400 + 200;	
+		
+		
+		
+		
+		
+		addHandler(Message.INIT_GAME_ELEMENT, handleInitDebugShow);
 		
 		CONFIG::debug {
 			debugSprite = new Sprite();
 			view.addChild(debugSprite);
 			
-			addHandler(Message.INIT_GAME_ELEMENT, handleInitDebugShow);
 			
-			addHandler(DataMessage.HERO_HEART_CHANGED, handleHeroHeartChange);
-			
-			new PushButton(debugSprite, 1100, 800, "spawnEmotion", handleSpawn);
-			
-			heartTestlabel = new Label(debugSprite, 1100, 400, "-");
+			//new PushButton(debugSprite, 1100, 800, "spawnEmotion", handleSpawn);
+		
+			//heartTestlabel = new Label(debugSprite, 1100, 400, "-");
 		}
+		addHandler(DataMessage.HERO_HEART_CHANGED, handleHeroHeartChange);
 	}
 	
-	CONFIG::debug
+	private function handleBgPic(asset:PICAsset):void {
+		
+	}
+	
 	private function handleHeroHeartChange(heartStat:int):void {
-		heartTestlabel.text = String(heartStat);
-		
-		//cardio.currentPos
-		
+		//heartTestlabel.text = String(heartStat);
 		cardio.add(cardio.currentPos - heartStat);
-		
-		
 		cardio.amplitude = 50 * (1 - (cardio.currentPos + 20) / 40);
-		
-		cardio.delay = 1000 * ( (cardio.currentPos + 20) / 40);
-		
-		
+		cardio.delay = 1000 * ((cardio.currentPos + 20) / 40);
 	
 	}
 	
-	CONFIG::debug
-	private function handleSpawn(event:Event):void {
-		sendMessage(Message.SPAWN_EMOTION);
-	}
+	//CONFIG::debug
+	//private function handleSpawn(event:Event):void {
+		//sendMessage(Message.SPAWN_EMOTION);
+	//}
 	
-	CONFIG::debug
+	
 	private function handleInitDebugShow(blank:Object):void {
-		var heroProxy:HeroProxy = proxyMap.getProxy(HeroProxy) as HeroProxy;
-		var heroConfig:HeroConfigVO = heroProxy.getHeroConfig();
+		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		uiSprite.addChild(backBitmap);
+		if (cardio) {
+			uiSprite.setChildIndex(cardio, 1);
+		}
 		
-		var emotionProxy:EmotionProxy = proxyMap.getProxy(EmotionProxy) as EmotionProxy;
-		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
-		
-		var circle:Shape = new Shape();
-		circle.graphics.lineStyle(0.1, 0xFF0000);
-		circle.graphics.drawCircle(0, 0, heroConfig.moveRadius);
-		circle.graphics.endFill();
-		debugSprite.addChild(circle);
-		circle.x = heroConfig.startingXPos;
-		circle.y = heroConfig.startingYPos;
-		
-		circle = new Shape();
-		circle.graphics.lineStyle(0.1, 0x8000FF);
-		circle.graphics.drawCircle(0, 0, emotionConfig.spawnRadius);
-		circle.graphics.endFill();
-		debugSprite.addChild(circle);
-		circle.x = heroConfig.startingXPos;
-		circle.y = heroConfig.startingYPos;
+		CONFIG::debug {
+			
+			var heroProxy:HeroProxy = proxyMap.getProxy(HeroProxy) as HeroProxy;
+			var heroConfig:HeroConfigVO = heroProxy.getHeroConfig();
+			
+			var emotionProxy:EmotionProxy = proxyMap.getProxy(EmotionProxy) as EmotionProxy;
+			var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
+			
+			var circle:Shape = new Shape();
+			circle.graphics.lineStyle(0.1, 0xFF0000);
+			circle.graphics.drawCircle(0, 0, heroConfig.moveRadius);
+			circle.graphics.endFill();
+			debugSprite.addChild(circle);
+			circle.x = heroConfig.startingXPos;
+			circle.y = heroConfig.startingYPos;
+			
+			circle = new Shape();
+			circle.graphics.lineStyle(0.1, 0x8000FF);
+			circle.graphics.drawCircle(0, 0, emotionConfig.spawnRadius);
+			circle.graphics.endFill();
+			debugSprite.addChild(circle);
+			circle.x = heroConfig.startingXPos;
+			circle.y = heroConfig.startingYPos;
+		}
 	
 	}
 	

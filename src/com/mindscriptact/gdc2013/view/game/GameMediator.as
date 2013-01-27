@@ -111,8 +111,8 @@ public class GameMediator extends Mediator {
 		var heroBitma:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO);
 		var heroTexture:Texture = Texture.fromBitmap(heroBitma);
 		
-		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
-		var backTexture:Texture = Texture.fromBitmap(backBitmap);
+		//var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		//var backTexture:Texture = Texture.fromBitmap(backBitmap);
 		
 		for (var i:int = 0; i < emotionsCanfig.emotions.length; i++) {
 			var emotion:EmotionVO = emotionsCanfig.emotions[i];
@@ -124,8 +124,8 @@ public class GameMediator extends Mediator {
 		
 		// init background
 		
-		backGroundImage = new Image(backTexture);
-		view.addChild(backGroundImage);
+		//backGroundImage = new Image(backTexture);
+		//view.addChild(backGroundImage);
 		
 		// init hero.
 		heroImage = new Image(heroTexture);
