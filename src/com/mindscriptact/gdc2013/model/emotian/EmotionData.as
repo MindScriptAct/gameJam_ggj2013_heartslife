@@ -14,6 +14,8 @@ public class EmotionData {
 	
 	public var strength:int;
 	
+	public var rotation:Number;
+	
 	public function EmotionData(emotionId:int) {
 		this.emotionId = emotionId;
 	

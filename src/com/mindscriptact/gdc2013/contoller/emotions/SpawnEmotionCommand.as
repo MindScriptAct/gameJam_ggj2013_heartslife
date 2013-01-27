@@ -20,7 +20,6 @@ public class SpawnEmotionCommand extends PooledCommand {
 	
 	public function execute(blank:Object):void {
 		
-		
 		//var id:int = 1
 		//
 		//var emotionData:EmotionData = new EmotionData(id);
@@ -48,7 +47,6 @@ public class SpawnEmotionCommand extends PooledCommand {
 		var emotionTargetX:Number = heroConfig.startingXPos + Math.sin(angle) * spawnRadius / 3;
 		var emotionTargetY:Number = heroConfig.startingYPos + Math.cos(angle) * spawnRadius / 3;
 		
-		
 		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
 		emotionData.strength = emotionProxy.getEmotionStrength(id);
 		
@@ -59,23 +57,28 @@ public class SpawnEmotionCommand extends PooledCommand {
 		var length:Number = Math.sqrt(emotionData.vectorX * emotionData.vectorX + emotionData.vectorY * emotionData.vectorY);
 		if (length == 0)
 			length = 0.001
-			
-		emotionData.vectorX = emotionData.vectorX/length*speed;
-		emotionData.vectorY = emotionData.vectorY/length*speed;		
 		
+		emotionData.vectorX = emotionData.vectorX / length * speed;
+		emotionData.vectorY = emotionData.vectorY / length * speed;
+		
+		emotionData.rotation = Math.random() * emotionConfig.emotionRotateRandom + emotionConfig.emotionRotateSpeeed;
+		
+		if (Math.random() > 0.5) {
+			emotionData.rotation *= -1;
+		}
 		
 		//emotionData.vectorX = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
 		//emotionData.vectorY = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
 		
 		/*if (emotionData.x > heroConfig.startingXPos) {
-			emotionData.vectorX *= -1;
-		}
-		if (emotionData.y > heroConfig.startingYPos) {
-			emotionData.vectorY *= -1;
-		}*/
+		   emotionData.vectorX *= -1;
+		   }
+		   if (emotionData.y > heroConfig.startingYPos) {
+		   emotionData.vectorY *= -1;
+		 }*/
 		
 		emotionProxy.addEmotion(emotionData);
-		
+	
 		//*/
 	}
 

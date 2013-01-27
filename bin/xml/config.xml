@@ -35,8 +35,10 @@
 		<emotionMoveSpeeed>3</emotionMoveSpeeed> <!-- enemy move minimal speed -->
 		<emotionMoveRandom>2</emotionMoveRandom> <!-- enemy move speed randomness-->
 		
-		<penaltyPercentage>0.1</penaltyPercentage>  <!-- part of score that is reduced if emotion runs away -->
+		<emotionRotateSpeeed>0.03</emotionRotateSpeeed> <!-- enemy rotate minimal speed -->
+		<emotionRotateRandom>0.01</emotionRotateRandom> <!-- enemy rotate speed randomness-->		
 		
+		<penaltyPercentage>0.1</penaltyPercentage>  <!-- part of score that is reduced if emotion runs away -->
 		
 		<maxPull>1</maxPull> <!-- maksimalus pritraukimas kai givybe kritine. -->
 		<maxPush>0.7</maxPush> <!-- maksimalus atstumimas kai givybe kritine. -->

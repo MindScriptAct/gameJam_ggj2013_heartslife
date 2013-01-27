@@ -130,11 +130,11 @@ public class MainMediator extends Mediator {
 
 		
 		
-		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
-		uiSprite.addChild(backBitmap);
-		if (cardio) {
-			uiSprite.setChildIndex(cardio, 1);
-		}
+		//var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		//uiSprite.addChild(backBitmap);
+		//if (cardio) {
+			//uiSprite.setChildIndex(cardio, 1);
+		//}
 		
 		CONFIG::debug {
 			

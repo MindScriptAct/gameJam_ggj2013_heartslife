@@ -17,6 +17,9 @@ public class EmotionsConfigVO {
 	public var emotionMoveSpeeed:Number;
 	public var emotionMoveRandom:Number;
 	
+	public var emotionRotateSpeeed:Number;
+	public var emotionRotateRandom:Number;
+	
 	public var spawnRadius:int;
 	
 	public var penaltyPercentage:Number;

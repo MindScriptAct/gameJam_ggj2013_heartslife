@@ -124,14 +124,14 @@ public class MoveEmotionsTask extends Task {
 			emotionViews[i].x = emotionData.x;
 			emotionViews[i].y = emotionData.y;
 			
+			
+			emotionViews[i].rotation += emotionData.rotation;
 		}
 	
 	}
 	
-	private function minimize(targetAngle:Number):Number 
-	{
-		if (Math.abs(targetAngle) > Math.PI)
-		{
+	private function minimize(targetAngle:Number):Number {
+		if (Math.abs(targetAngle) > Math.PI) {
 			if (targetAngle > 0)
 				return targetAngle - Math.PI;
 			else

@@ -17,6 +17,7 @@ import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import org.mvcexpress.mvc.Mediator;
 import starling.display.Image;
+import starling.display.Sprite;
 import starling.textures.Texture;
 
 /**
@@ -31,7 +32,8 @@ public class GameMediator extends Mediator {
 	private var emotionViews:Vector.<Image> = new Vector.<Image>()
 	private var emotionSize:int;
 	private var backGroundImage:Image;
-	;
+	private var elementHolder:Sprite;
+	
 	//private var testImage:Image;
 	
 	[Inject]
@@ -68,20 +70,20 @@ public class GameMediator extends Mediator {
 	private function handleAllEmotionRemove(blank:Object):void {
 		while (emotionViews.length) {
 			var emotionSpawn:Image = emotionViews.pop();
-			view.removeChild(emotionSpawn);
+			elementHolder.removeChild(emotionSpawn);
 		}
 	}
 	
 	private function handleEmotionRemove(nr:int):void {
 		var emotionSpawn:Image = emotionViews[nr];
-		view.removeChild(emotionSpawn);
+		elementHolder.removeChild(emotionSpawn);
 		emotionViews.splice(nr, 1);
 	}
 	
 	private function handleEmotionSpawn(emotionData:EmotionData):void {
 		
 		var emotionSpawn:Image = new Image(emotionTextures[emotionData.emotionId]);
-		view.addChild(emotionSpawn);
+		elementHolder.addChild(emotionSpawn);
 		emotionSpawn.x = emotionData.x;
 		emotionSpawn.y = emotionData.y;
 		
@@ -111,8 +113,8 @@ public class GameMediator extends Mediator {
 		var heroBitma:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO);
 		var heroTexture:Texture = Texture.fromBitmap(heroBitma);
 		
-		//var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
-		//var backTexture:Texture = Texture.fromBitmap(backBitmap);
+		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		var backTexture:Texture = Texture.fromBitmap(backBitmap);
 		
 		for (var i:int = 0; i < emotionsCanfig.emotions.length; i++) {
 			var emotion:EmotionVO = emotionsCanfig.emotions[i];
@@ -121,11 +123,13 @@ public class GameMediator extends Mediator {
 			
 			emotionTextures[emotion.id] = Texture.fromBitmap(emotionBitma);
 		}
+		// add element holder.
+		elementHolder = new Sprite();
+		view.addChild(elementHolder);
 		
 		// init background
-		
-		//backGroundImage = new Image(backTexture);
-		//view.addChild(backGroundImage);
+		backGroundImage = new Image(backTexture);
+		view.addChild(backGroundImage);
 		
 		// init hero.
 		heroImage = new Image(heroTexture);
@@ -133,7 +137,7 @@ public class GameMediator extends Mediator {
 		heroImage.pivotX = assetSize >> 1;
 		heroImage.pivotY = assetSize >> 1;
 		provide(heroImage, ProvideId.HERO);
-		view.addChild(heroImage);
+		elementHolder.addChild(heroImage);
 		handleHeroPositionSet();
 	}
 	
