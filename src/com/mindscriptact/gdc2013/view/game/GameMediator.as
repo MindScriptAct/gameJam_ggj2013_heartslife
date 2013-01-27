@@ -202,10 +202,10 @@ public class GameMediator extends Mediator {
 		heroImage = new Image(heroTexture);
 		heroSprite.addChild(heroImage);
 		//TODO: Refactor!!!!
-		heroImage.pivotX = (assetSize >> 1) + heroImage.width*0.1; 
-		heroImage.pivotY = (assetSize >> 1) + heroImage.height*0.1;
-		heroImage.x += 18;
-		heroImage.y += 18;
+		heroImage.pivotX = (assetSize >> 1) + heroImage.width*0.08; 
+		heroImage.pivotY = (assetSize >> 1) + heroImage.height*0.08;
+		heroImage.x += 14;
+		heroImage.y += 17;
 		
 		//TODO: Refactor!!!!
 		CardioChart.heroImage = heroImage;
