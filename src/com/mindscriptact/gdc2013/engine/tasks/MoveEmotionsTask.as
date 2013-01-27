@@ -1,13 +1,10 @@
 package com.mindscriptact.gdc2013.engine.tasks {
-import adobe.utils.CustomActions;
-import com.mindscriptact.gdc2013.constants.ProvideId;
-import com.mindscriptact.gdc2013.messages.DataMessage;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.hero.HeroData;
-import flash.display.GraphicsTrianglePath;
+import flash.geom.Point;
 import org.mvcexpress.live.Task;
 import starling.display.Image;
 
@@ -32,7 +29,7 @@ public class MoveEmotionsTask extends Task {
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO_DATA')]
 	public var heroData:HeroData;
 	
-	private var maxAngle:Number = Math.PI / 60;
+	private var maxAngle:Number = Math.PI / 120;
 	
 	override public function run():void {
 		
@@ -49,69 +46,51 @@ public class MoveEmotionsTask extends Task {
 			
 			// pull/push
 			
-			// a, b, c
+			//find emotion rotation (to x axis).
+			var initialAngle:Number = Math.atan2(emotionData.vectorY, emotionData.vectorX);
+			var ca:Number = Math.cos(-initialAngle);
+			var sa:Number = Math.sin(-initialAngle);
 			
-			// ((b.x - a.x)* (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) > 0
+			//rotate hero (and emotion) to match x axis (to determine if left or right angle should be made)
+			var tempHero:Point = new Point((heroData.x - emotionData.x) * ca - (heroData.y - emotionData.y) * sa, (heroData.x - emotionData.x) * sa + (heroData.y - emotionData.y) * ca);
 			
-			var pointX:Number = heroData.x - emotionData.x;
-			var pointY:Number = heroData.y - emotionData.y;
+			//rotation change limit for one frame (max angle)
+			var angle:Number = Math.abs(heroData.heartState / heroConfig.life * maxAngle)
 			
-			var angle:Number = heroData.heartState / heroConfig.life * maxAngle;
+			//desired follow angle;
+			var followAngle:Number = Math.atan2(tempHero.y, tempHero.x);
 			
-			var positiveEngle:Boolean = (emotionData.vectorX * pointY - emotionData.vectorY * pointX) > 0;
+			//desired run away angle;
+			var runawayAngle:Number = (followAngle > 0) ? followAngle - Math.PI : followAngle - Math.PI;
 			
-			if (positiveEngle) { 
-				if (emotionData.strength > 0) { // raudonas
-					if (heroData.heartState > 0) { // imt raudona
-						
-					} else { // imt melina
-						
-					}
-				} else { // melinas
-					if (heroData.heartState > 0) { // imt raudona
-						
-					} else { // imt melina
-						
-					}
+			if (Math.abs(angle) < Math.abs(followAngle)) {
+				followAngle = angle * followAngle / Math.abs(followAngle);
+			}
+			
+			if (Math.abs(angle) < Math.abs(runawayAngle)) {
+				runawayAngle = angle * runawayAngle / Math.abs(runawayAngle);
+			}
+			
+			angle = runawayAngle;
+			
+			//determine if run or follow
+			if (heroData.heartState > 0) {
+				if (emotionData.strength > 0) { //traukiam
+					angle = followAngle;
+				} else { //stumiam
+					angle = runawayAngle;
 				}
 			} else {
-				if (emotionData.strength > 0) { // raudonas
-					if (heroData.heartState > 0) { // imt raudona
-						
-					} else { // imt melina
-						
-					}
-				} else { // melinas
-					if (heroData.heartState > 0) { // imt raudona
-						
-					} else { // imt melina
-						
-					}
+				if (emotionData.strength > 0) { //stumiam
+					angle = runawayAngle;
+				} else { //traukiam
+					angle = followAngle;
 				}
 			}
 			
-			//if (angle > 0) {
-			//
-			// melini arteja
-			//
-			//if (emotionData.strength > 0) { // raudonas
-			//
-			//} else { // melinas
-			//
-			//}
-			//
-			//} else {
-			// raudoni arteja.
-			//if (emotionData.strength > 0) { // raudonas
-			//
-			//} else { // melinas
-			//
-			//}
-			//
-			//}
-			
-			var ca:Number = Math.cos(angle);
-			var sa:Number = Math.sin(angle);
+			//rotate emotion
+			ca = Math.cos(angle);
+			sa = Math.sin(angle);
 			
 			var tx:Number = emotionData.vectorX * ca - emotionData.vectorY * sa;
 			var ty:Number = emotionData.vectorX * sa + emotionData.vectorY * ca;
@@ -130,12 +109,9 @@ public class MoveEmotionsTask extends Task {
 			var newDist:int = distX * distX + distY * distY;
 			
 			if (newDist > distance) {
-				
 				//emotionData.x = centerPointX + (centerPointX - emotionData.x);
 				//emotionData.y = centerPointY + (centerPointY - emotionData.y);
-				
 				sendPostMessage(Message.REMOVE_EMOTION, emotionData);
-				
 			}
 			
 			// render
@@ -144,25 +120,7 @@ public class MoveEmotionsTask extends Task {
 			
 		}
 	
-		// push / pull
-	
 	}
-
-	// push/pull
-
-	//var difX:int = heroData.x - emotionDatas[i].x;
-	//var difY:int = heroData.y - emotionDatas[i].y;
-	//
-	//var heroDistance:Number = Math.sqrt(difX * difX + difY * difY);
-	//
-	//var oneX:Number = difX / heroDistance;
-	//var oneY:Number = difY / heroDistance;
-
-	//emotionDatas[i].x += Math.round(oneX * 10);
-	//emotionDatas[i].y += Math.round(oneY * 10);
-
-	//emotionDatas[i].vectorX += Math.round(oneX / 10);
-	//emotionDatas[i].vectorY += Math.round(oneY / 10);
 
 }
 }
