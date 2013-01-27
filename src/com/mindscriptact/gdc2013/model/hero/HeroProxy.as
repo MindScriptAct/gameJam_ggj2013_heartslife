@@ -62,5 +62,9 @@ public class HeroProxy extends Proxy {
 	public function getHeartState():int {
 		return heroData.heartState;
 	}
+	
+	public function getMaxLife():int {
+		return heroConfig.life;
+	}
 }
 }

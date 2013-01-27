@@ -29,6 +29,8 @@ public class StartNewGameCommand extends Command {
 		
 		emotionProxy.removeAll();
 		
+		emotionProxy.resetSpawnTimer();
+		
 		gameProxy.resetScore();
 		
 		

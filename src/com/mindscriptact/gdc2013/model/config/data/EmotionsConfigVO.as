@@ -9,9 +9,6 @@ public class EmotionsConfigVO {
 	public var size:int;
 	public var assetSize:int;
 	
-	public var spawnRateStarting:Number;
-	public var spawnRateChange:Number;
-	
 	public var waveProgressStarting:Number;
 	public var waveProgressSpeed:Number;
 	
@@ -24,6 +21,10 @@ public class EmotionsConfigVO {
 	public var spawnRadius:int;
 	
 	public var penaltyPercentage:Number;
+	
+	
+	public var maxPull:Number;
+	public var maxPush:Number;
 
 	public var emotions:Vector.<EmotionVO> = new Vector.<EmotionVO>();
 }

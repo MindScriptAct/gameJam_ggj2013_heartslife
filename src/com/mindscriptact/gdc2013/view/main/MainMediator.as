@@ -34,6 +34,7 @@ public class MainMediator extends Mediator {
 	
 	private var uiSprite:Sprite;
 	private var cardio:CardioChart;
+	private var maxLife:int;
 	
 	[Inject]
 	public var view:Main;
@@ -43,6 +44,7 @@ public class MainMediator extends Mediator {
 		addHandler(Message.HIDE_LOADER, handleHideLoader);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
+		
 		
 		uiSprite = new Sprite();
 		view.addChild(uiSprite);
@@ -54,11 +56,7 @@ public class MainMediator extends Mediator {
 		//var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
 		//
 		
-		cardio = new CardioChart(160, 515, 20, 0xFFFFFF, 50);
-		uiSprite.addChild(cardio);
-		cardio.x = 1040;
-		cardio.y = 190;
-		cardio.start();
+
 		
 		//cardio.amplitude = 50;
 		//cardio.delay = 150;
@@ -101,10 +99,13 @@ public class MainMediator extends Mediator {
 	}
 	
 	private function handleHeroHeartChange(heartStat:int):void {
-		//heartTestlabel.text = String(heartStat);
-		cardio.add(cardio.currentPos - heartStat);
-		cardio.amplitude = 50 * (1 - (cardio.currentPos + 20) / 40);
-		cardio.delay = 1000 * ((cardio.currentPos + 20) / 40);
+		
+		if (cardio) {
+			//heartTestlabel.text = String(heartStat);
+			cardio.add(cardio.currentPos - heartStat);
+			cardio.amplitude = 50 * (1 - (cardio.currentPos + maxLife) / (maxLife*2));
+			cardio.delay = 1000 * ((cardio.currentPos + maxLife) / (maxLife*2));
+		}
 	
 	}
 	
@@ -115,6 +116,20 @@ public class MainMediator extends Mediator {
 	
 	
 	private function handleInitDebugShow(blank:Object):void {
+		
+		var heroProxy:HeroProxy = proxyMap.getProxy(HeroProxy) as HeroProxy;
+		maxLife = heroProxy.getMaxLife();
+		
+		cardio = new CardioChart(160, 515, maxLife, 0xFFFFFF, 50);
+		uiSprite.addChild(cardio);
+		cardio.x = 1040;
+		cardio.y = 190;
+		cardio.start();
+		
+		
+
+		
+		
 		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
 		uiSprite.addChild(backBitmap);
 		if (cardio) {
@@ -123,7 +138,6 @@ public class MainMediator extends Mediator {
 		
 		CONFIG::debug {
 			
-			var heroProxy:HeroProxy = proxyMap.getProxy(HeroProxy) as HeroProxy;
 			var heroConfig:HeroConfigVO = heroProxy.getHeroConfig();
 			
 			var emotionProxy:EmotionProxy = proxyMap.getProxy(EmotionProxy) as EmotionProxy;

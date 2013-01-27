@@ -75,6 +75,10 @@ public class EmotionProxy extends Proxy {
 		return emotionConfig.penaltyPercentage;
 	}
 	
+	public function resetSpawnTimer():void {
+		//
+	}
+	
 	override protected function onRegister():void {
 		provide(emotionDatas, ProvideId.EMOTION_DATAS);
 		provide(emotionsData, ProvideId.EMOTIONS_INFO);

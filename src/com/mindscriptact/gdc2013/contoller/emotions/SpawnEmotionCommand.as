@@ -42,7 +42,7 @@ public class SpawnEmotionCommand extends PooledCommand {
 		//*
 		
 		// todo
-		var id:int = Math.floor(Math.random() * 6) + 1;
+		var id:int = Math.floor(Math.random() * 10) + 1;
 		var emotionData:EmotionData = new EmotionData(id);
 		
 		var angle:Number = Math.random() * Math.PI * 2;
@@ -60,8 +60,8 @@ public class SpawnEmotionCommand extends PooledCommand {
 		
 		emotionData.strength = emotionProxy.getEmotionStrength(id);
 		
-		emotionData.vectorX = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;
-		emotionData.vectorY = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;
+		emotionData.vectorX = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
+		emotionData.vectorY = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
 		
 		if (emotionData.x > heroConfig.startingXPos) {
 			emotionData.vectorX *= -1;

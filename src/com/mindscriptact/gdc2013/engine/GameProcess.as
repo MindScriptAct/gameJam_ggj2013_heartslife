@@ -6,6 +6,7 @@ import com.mindscriptact.gdc2013.engine.tasks.MoveEmotionsTask;
 import com.mindscriptact.gdc2013.engine.tasks.MoveHeroTask;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.messages.ProcessMessage;
+import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import org.mvcexpress.live.Process;
 
 /**
@@ -13,6 +14,7 @@ import org.mvcexpress.live.Process;
  * @author Deril
  */
 public class GameProcess extends Process {
+	
 	
 	override protected function onRegister():void {
 		

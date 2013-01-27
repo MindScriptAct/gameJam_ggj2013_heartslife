@@ -29,7 +29,8 @@ public class MoveEmotionsTask extends Task {
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO_DATA')]
 	public var heroData:HeroData;
 	
-	private var maxAngle:Number = Math.PI / 120;
+	public static var maxPullAngle:Number;
+	public static var maxPushAngle:Number;
 	
 	override public function run():void {
 		
@@ -55,7 +56,7 @@ public class MoveEmotionsTask extends Task {
 			var tempHero:Point = new Point((heroData.x - emotionData.x) * ca - (heroData.y - emotionData.y) * sa, (heroData.x - emotionData.x) * sa + (heroData.y - emotionData.y) * ca);
 			
 			//rotation change limit for one frame (max angle)
-			var angle:Number = Math.abs(heroData.heartState / heroConfig.life * maxAngle)
+			var angle:Number = Math.abs(heroData.heartState / heroConfig.life * maxPushAngle)
 			
 			//desired follow angle;
 			var followAngle:Number = Math.atan2(tempHero.y, tempHero.x);

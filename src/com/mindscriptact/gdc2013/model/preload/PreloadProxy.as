@@ -7,6 +7,7 @@ import com.mindscriptact.assetLibrary.event.AssetEvent;
 import com.mindscriptact.gdc2013.constants.AssetIds;
 import com.mindscriptact.gdc2013.constants.PreloadSteps;
 import com.mindscriptact.gdc2013.constants.ProvideId;
+import com.mindscriptact.gdc2013.engine.tasks.MoveEmotionsTask;
 import com.mindscriptact.gdc2013.messages.DataMessage;
 import com.mindscriptact.gdc2013.model.config.data.AllConfigsVO;
 import com.mindscriptact.gdc2013.model.config.data.GameConfigVO;
@@ -81,6 +82,10 @@ public class PreloadProxy extends Proxy {
 		provide(config.gameConfig, ProvideId.GAME_CONFIG);
 		provide(config.heroConfig, ProvideId.HERO_CONFIG);
 		provide(config.emotionConfig, ProvideId.EMOTION_CONFIG);
+		
+		
+		MoveEmotionsTask.maxPullAngle = Math.PI / 180 * config.emotionConfig.maxPull;
+		MoveEmotionsTask.maxPushAngle = Math.PI / 180 * config.emotionConfig.maxPush;
 		
 		sendMessage(DataMessage.PRELOAD_DONE);
 	}
