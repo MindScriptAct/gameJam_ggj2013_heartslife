@@ -6,6 +6,7 @@ import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import org.mvcexpress.live.Task;
 import starling.display.Image;
+import starling.display.Sprite;
 
 /**
  * TODO:CLASS COMMENT
@@ -20,7 +21,7 @@ public class MoveHeroTask extends Task {
 	public var keyDictionary:Dictionary;
 	
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO')]
-	public var heroView:Image;
+	public var heroView:Sprite;
 	
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO_CONFIG')]
 	public var heroConfig:HeroConfigVO;

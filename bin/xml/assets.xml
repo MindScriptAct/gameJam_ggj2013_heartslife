@@ -9,9 +9,12 @@
 	
 	<path id="picDir" url="pics/">
 		
-		<file assetId="background" fileName="background2.png" permanent="true"/>
+		<file assetId="background" fileName="background.png" permanent="true"/>
 		
-		<file assetId="hero" fileName="hero.png" permanent="true"/>
+		<file assetId="hero_heart" fileName="hero_heart.png" permanent="true"/>
+		<file assetId="hero_normal" fileName="hero_normal.png" permanent="true"/>
+		<file assetId="hero_positive" fileName="hero_positive.png" permanent="true"/>
+		<file assetId="hero_negative" fileName="hero_negative.png" permanent="true"/>
 		
 		<file assetId="emotion_1" fileName="emotion_p1.png" permanent="true"/>
 		<file assetId="emotion_2" fileName="emotion_p2.png" permanent="true"/>

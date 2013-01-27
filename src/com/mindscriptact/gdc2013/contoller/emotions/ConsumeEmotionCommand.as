@@ -41,8 +41,6 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		// TODO ... check for score..
 		var comboSize:int = consumeHystoryProxy.getHystoryChain();
 		if (comboSize > emotionConfig.comboStarts) {
-			trace( "comboSize : " + comboSize );
-			
 			gameProxy.increaseScore((comboSize-emotionConfig.comboStarts) * emotionConfig.comboScores);
 		}
 		

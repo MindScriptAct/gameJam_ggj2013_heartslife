@@ -77,9 +77,6 @@ public class MainMediator extends Mediator {
 		//cardio.y = 400 + 200;	
 		
 		
-		
-		
-		
 		addHandler(Message.INIT_GAME_ELEMENT, handleInitDebugShow);
 		
 		CONFIG::debug {

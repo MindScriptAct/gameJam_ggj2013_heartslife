@@ -25,7 +25,6 @@ import starling.textures.Texture;
  * @author Deril
  */
 public class GameMediator extends Mediator {
-	private var heroImage:Image;
 	private var heroProxy:HeroProxy;
 	private var emotionProxy:EmotionProxy;
 	private var emotionTextures:Dictionary = new Dictionary();
@@ -33,6 +32,12 @@ public class GameMediator extends Mediator {
 	private var emotionSize:int;
 	private var backGroundImage:Image;
 	private var elementHolder:Sprite;
+	
+	private var heroSprite:Sprite;
+	private var heroImage:Image;
+	private var heroImage_norm:Image;
+	private var heroImage_pos:Image;
+	private var heroImage_neg:Image;
 	
 	//private var testImage:Image;
 	
@@ -110,8 +115,17 @@ public class GameMediator extends Mediator {
 		emotionSize = emotionsCanfig.assetSize;
 		
 		// init textures
-		var heroBitma:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO);
+		var heroBitma:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO_HEART);
 		var heroTexture:Texture = Texture.fromBitmap(heroBitma);
+		
+		var heroBitmaNorm:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO_NORMAL);
+		var heroTextureNorm:Texture = Texture.fromBitmap(heroBitmaNorm);
+		
+		var heroBitmaPos:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO_POSITIVE);
+		var heroTexturePos:Texture = Texture.fromBitmap(heroBitmaPos);
+		
+		var heroBitmaNeg:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO_NEGATIVE);
+		var heroTextureNeg:Texture = Texture.fromBitmap(heroBitmaNeg);
 		
 		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
 		var backTexture:Texture = Texture.fromBitmap(backBitmap);
@@ -132,19 +146,45 @@ public class GameMediator extends Mediator {
 		view.addChild(backGroundImage);
 		
 		// init hero.
-		heroImage = new Image(heroTexture);
+		
+		heroSprite = new Sprite();
+		elementHolder.addChild(heroSprite);
+		
 		var assetSize:int = heroProxy.getAssetSize();
+		
+		
+		
+		heroImage_norm = new Image(heroTextureNorm);
+		heroSprite.addChild(heroImage_norm);
+		heroImage_norm.pivotX = assetSize >> 1;
+		heroImage_norm.pivotY = assetSize >> 1;
+		
+		heroImage_pos = new Image(heroTextureNeg);
+		heroSprite.addChild(heroImage_pos);
+		heroImage_pos.pivotX = assetSize >> 1;
+		heroImage_pos.pivotY = assetSize >> 1;
+		heroImage_pos.visible = false;
+		
+		heroImage_neg = new Image(heroTexturePos);
+		heroSprite.addChild(heroImage_neg);
+		heroImage_neg.pivotX = assetSize >> 1;
+		heroImage_neg.pivotY = assetSize >> 1
+		heroImage_neg.visible = false;
+		
+		heroImage = new Image(heroTexture);
+		heroSprite.addChild(heroImage);
 		heroImage.pivotX = assetSize >> 1;
 		heroImage.pivotY = assetSize >> 1;
-		provide(heroImage, ProvideId.HERO);
-		elementHolder.addChild(heroImage);
+		
 		handleHeroPositionSet();
+		
+		provide(heroSprite, ProvideId.HERO);
 	}
 	
 	private function handleHeroPositionSet(blank:Object = null):void {
 		if (heroProxy) {
-			heroImage.x = heroProxy.getHeroPosX();
-			heroImage.y = heroProxy.getHeroPosY();
+			heroSprite.x = heroProxy.getHeroPosX();
+			heroSprite.y = heroProxy.getHeroPosY();
 		}
 	}
 	
