@@ -3,6 +3,7 @@ import adobe.utils.CustomActions;
 import com.mindscriptact.assetLibrary.AssetLibrary;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
+import flash.display.PixelSnapping;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.filters.BlurFilter;
@@ -66,7 +67,7 @@ public class CardioChart extends Sprite {
 		_maxAmplitude = maxAmplitude;
 		_bitmapData = new BitmapData(_bitmapWidth, maxAmplitude * 2 + 1 + 20, true, 0x00000000);
 		
-		_bitmap = new Bitmap(_bitmapData);
+		_bitmap = new Bitmap(_bitmapData, PixelSnapping.NEVER, true);
 		_bitmapRect = new Rectangle(0, 0, _bitmapWidth, _bitmapData.height);
 		_clearRect = new Rectangle(0, 0, _scrollSpeed, _bitmapData.height);
 		addChild(_bitmap);
