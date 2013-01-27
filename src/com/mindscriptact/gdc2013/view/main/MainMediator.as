@@ -9,6 +9,7 @@ import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
+import com.mindscriptact.gdc2013.view.main.elemets.CardioChart;
 import com.mindscriptact.gdc2013.view.preload.PreloadView;
 import flash.display.Shape;
 import flash.display.Sprite;
@@ -27,6 +28,8 @@ public class MainMediator extends Mediator {
 	CONFIG::debug
 	private var heartTestlabel:Label;
 	
+	private var uiSprite:Sprite;
+	
 	[Inject]
 	public var view:Main;
 	
@@ -35,6 +38,12 @@ public class MainMediator extends Mediator {
 		addHandler(Message.HIDE_LOADER, handleHideLoader);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
+		
+		uiSprite = new Sprite();
+		view.addChild(uiSprite);
+		
+		//var cardio:CardioChart = 
+		
 		
 		CONFIG::debug {
 			debugSprite = new Sprite();
@@ -113,6 +122,8 @@ public class MainMediator extends Mediator {
 			view.addChild(screen);
 			mediatorMap.mediate(screen);
 		}
+		
+		uiSprite.visible = screenName == ScreenIds.GAME;
 		
 		CONFIG::debug {
 			debugSprite.visible = screenName == ScreenIds.GAME;

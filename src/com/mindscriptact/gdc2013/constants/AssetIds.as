@@ -13,6 +13,8 @@ public class AssetIds {
 	static public const HERO:String = "hero";
 	
 	static public var EMOTION_PREFIX:String = "emotion_";
+	
+	static public const BACKGROUND:String = "background";
 
 }
 }

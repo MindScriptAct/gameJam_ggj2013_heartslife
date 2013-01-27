@@ -24,8 +24,8 @@
 	</heroConfig>
 	
 	<emotionConfig>
-		<size>64</size>
-		<assetSize>80</assetSize>
+		<size>128</size>
+		<assetSize>160</assetSize>
 		
 		<spawnRateStarting>1</spawnRateStarting>
 		<spawnRateChange>0.5</spawnRateChange>
@@ -39,7 +39,7 @@
 		<spawnRateStart>1000</spawnRateStart>
 		
 		
-		<emotionMoveSpeeed>5</emotionMoveSpeeed>
+		<emotionMoveSpeeed>3</emotionMoveSpeeed>
 		<emotionMoveRandom>2</emotionMoveRandom>
 		
 		

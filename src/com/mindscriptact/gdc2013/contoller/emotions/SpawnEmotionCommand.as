@@ -34,7 +34,10 @@ public class SpawnEmotionCommand extends PooledCommand {
 		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * spawnRadius;
 		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * spawnRadius;
 		
+		
 		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
+		
+		emotionData.strength = emotionProxy.getEmotionStrength(id);
 		
 		emotionData.vectorX = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;
 		emotionData.vectorY = Math.random() * emotionConfig.emotionMoveSpeeed + emotionConfig.emotionMoveRandom;

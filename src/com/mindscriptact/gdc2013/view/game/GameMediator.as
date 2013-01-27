@@ -30,6 +30,7 @@ public class GameMediator extends Mediator {
 	private var emotionTextures:Dictionary = new Dictionary();
 	private var emotionViews:Vector.<Image> = new Vector.<Image>()
 	private var emotionSize:int;
+	private var backGroundImage:Image;
 	;
 	//private var testImage:Image;
 	
@@ -110,6 +111,9 @@ public class GameMediator extends Mediator {
 		var heroBitma:Bitmap = AssetLibrary.getPICBitmap(AssetIds.HERO);
 		var heroTexture:Texture = Texture.fromBitmap(heroBitma);
 		
+		var backBitmap:Bitmap = AssetLibrary.getPICBitmap(AssetIds.BACKGROUND);
+		var backTexture:Texture = Texture.fromBitmap(backBitmap);
+		
 		for (var i:int = 0; i < emotionsCanfig.emotions.length; i++) {
 			var emotion:EmotionVO = emotionsCanfig.emotions[i];
 			
@@ -117,6 +121,11 @@ public class GameMediator extends Mediator {
 			
 			emotionTextures[emotion.id] = Texture.fromBitmap(emotionBitma);
 		}
+		
+		// init background
+		
+		backGroundImage = new Image(backTexture);
+		view.addChild(backGroundImage);
 		
 		// init hero.
 		heroImage = new Image(heroTexture);

@@ -29,11 +29,11 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		
 		var life:int = heroProxy.getHeroConfig().life;
 		
-		if (heartState > life) {
+		if (heartState >= life) {
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		
-		if (heartState < -life) {
+		if (heartState <= -life) {
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		
