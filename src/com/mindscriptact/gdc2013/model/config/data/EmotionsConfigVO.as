@@ -27,6 +27,12 @@ public class EmotionsConfigVO {
 	
 	public var maxPull:Number;
 	public var maxPush:Number;
+	
+	
+	
+	
+	public var comboStarts:int;
+	public var comboScores:int;
 
 	public var emotions:Vector.<EmotionVO> = new Vector.<EmotionVO>();
 }

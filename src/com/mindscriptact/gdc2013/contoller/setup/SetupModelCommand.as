@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.setup {
+import com.mindscriptact.gdc2013.model.ConsumeHystoryProxy;
 import com.mindscriptact.gdc2013.model.keyboard.KeyboardProxy;
 import com.mindscriptact.gdc2013.model.preload.PreloadProxy;
 import flash.display.Stage;
@@ -18,6 +19,7 @@ public class SetupModelCommand extends Command {
 		proxyMap.map(new KeyboardProxy(stage));
 		
 		proxyMap.map(new PreloadProxy());
+		proxyMap.map(new ConsumeHystoryProxy());
 	
 	}
 

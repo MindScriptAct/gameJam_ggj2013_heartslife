@@ -43,6 +43,10 @@
 		<maxPull>1</maxPull> <!-- maksimalus pritraukimas kai givybe kritine. -->
 		<maxPush>0.7</maxPush> <!-- maksimalus atstumimas kai givybe kritine. -->
 		
+		
+		<comboStarts>3</comboStarts>
+		<comboScores>100</comboScores>
+		
 		<emotions>
 			<emotion id="1" positive="true" strength="3" score="100"></emotion>
 			<emotion id="2" positive="true" strength="3" score="100"></emotion>

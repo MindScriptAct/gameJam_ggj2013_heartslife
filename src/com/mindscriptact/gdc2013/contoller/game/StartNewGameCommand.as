@@ -1,6 +1,7 @@
 package com.mindscriptact.gdc2013.contoller.game {
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.messages.Message;
+import com.mindscriptact.gdc2013.model.ConsumeHystoryProxy;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.game.GameProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
@@ -19,9 +20,11 @@ public class StartNewGameCommand extends Command {
 	[Inject]
 	public var emotionProxy:EmotionProxy;
 	
-	
 	[Inject]
 	public var gameProxy:GameProxy;
+	
+	[Inject]
+	public var consumeHystoryProxy:ConsumeHystoryProxy;
 	
 	public function execute(blank:Object):void {
 		
@@ -33,6 +36,7 @@ public class StartNewGameCommand extends Command {
 		
 		gameProxy.resetScore();
 		
+		consumeHystoryProxy.reset();
 		
 		sendMessage(Message.SHOW_SCREEN, ScreenIds.GAME);
 	

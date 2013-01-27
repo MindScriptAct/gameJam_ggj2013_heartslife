@@ -14,6 +14,8 @@ public class DataMessage {
 	static public const HERO_HEART_CHANGED:String = "heroHeartChanged";
 	static public const All_EMOTIONS_REMOVED:String = "allEmotionsRemoved";
 	static public const SCORE_CHANGE:String = "scoreChange";
+	static public const EMOTION_HYSTORY_RESET:String = "emotionHystoryReset";
+	static public const EMOTION_ADDED_TO_HYSTORY:String = "emotionAddedToHystory";
 	
 	
 }
