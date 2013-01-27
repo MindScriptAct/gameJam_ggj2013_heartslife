@@ -56,11 +56,9 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		if (heartState >= life) {
 			
 			// TODO !!! BUUUG... is called even after stage ends... WHY....
-			//AssetLibrary.playMP3("heart_death",0,1);
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		if (heartState <= -life) {
-			//AssetLibrary.playMP3("heart_death",0,1);
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		

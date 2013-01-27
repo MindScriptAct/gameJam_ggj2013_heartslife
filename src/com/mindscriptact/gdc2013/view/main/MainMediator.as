@@ -35,16 +35,16 @@ public class MainMediator extends Mediator {
 	
 	private var uiSprite:Sprite;
 	private var cardio:CardioChart;
-	private var maxLife:int;
+	private var maxLife:int
+	private var currentScreen:String;
 	
 	[Inject]
 	public var view:Main;
 	
 	override public function onRegister():void {
 		
-		
 		//if (view == null) {
-			//throw Error("AAAAA");
+		//throw Error("AAAAA");
 		//}
 		
 		addHandler(Message.SHOW_LOADER, handleShowLoader);
@@ -54,9 +54,9 @@ public class MainMediator extends Mediator {
 		
 		uiSprite = new Sprite();
 		//try {
-			view.addChild(uiSprite);
+		view.addChild(uiSprite);
 		//} catch (error:Error) {
-			//throw Error("WTF");
+		//throw Error("WTF");
 		//}
 		
 		uiSprite.mouseChildren = false;
@@ -167,34 +167,38 @@ public class MainMediator extends Mediator {
 	}
 	
 	private function handleShowScreen(screenName:String):void {
-		if (screen) {
-			view.removeChild(screen);
-			mediatorMap.unmediate(screen);
-			screen = null;
+		if (currentScreen != screenName) {
+			currentScreen = screenName;
+			
+			if (screen) {
+				view.removeChild(screen);
+				mediatorMap.unmediate(screen);
+				screen = null;
+			}
+			switch (screenName) {
+				case ScreenIds.START: 
+					screen = new StartScreenSPR();
+					cardio.pause();
+					break;
+				case ScreenIds.GAME: 
+					screen = new GameScreenSPR();
+					cardio.start();
+					break;
+				case ScreenIds.GAMEOVER: 
+					screen = new GameOverScreenSPR();
+					cardio.pause();
+					AssetLibrary.playMP3("heart_death");
+					break;
+				default: 
+					throw Error("TODO")
+			}
+			if (screen) {
+				view.addChild(screen);
+				mediatorMap.mediate(screen);
+			}
+			
+			uiSprite.visible = screenName == ScreenIds.GAME;
 		}
-		switch (screenName) {
-			case ScreenIds.START: 
-				screen = new StartScreenSPR();
-				cardio.pause();
-				break;
-			case ScreenIds.GAME: 
-				screen = new GameScreenSPR();
-				cardio.start();
-				break;
-			case ScreenIds.GAMEOVER: 
-				screen = new GameOverScreenSPR();
-				cardio.pause();
-				break;
-			default: 
-				throw Error("TODO")
-		}
-		if (screen) {
-			view.addChild(screen);
-			mediatorMap.mediate(screen);
-		}
-		
-		uiSprite.visible = screenName == ScreenIds.GAME;
-	
 		//CONFIG::debug {
 		//debugSprite.visible = screenName == ScreenIds.GAME;
 		//}
