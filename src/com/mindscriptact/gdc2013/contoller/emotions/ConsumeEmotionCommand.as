@@ -54,6 +54,8 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		var heartState:int = heroProxy.getHeartState();
 		var life:int = heroProxy.getHeroConfig().life;
 		if (heartState >= life) {
+			
+			// TODO !!! BUUUG... is called even after stage ends... WHY....
 			//AssetLibrary.playMP3("heart_death",0,1);
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
