@@ -29,8 +29,9 @@
 		<file assetId="emotion_10" fileName="emotion_n5.png" permanent="true"/>
 	</path>
 	
-	
-	
+	<path id="mp3Dir" url="mp3/">
+		<!-- <file assetId="soundX" fileName="saundX.mp3" permanent="true"/>-->
+	</path>
 	
 	<!-- EXAMPLE	
 	<path id="testXMLDir" url="assets/xmlTest/">

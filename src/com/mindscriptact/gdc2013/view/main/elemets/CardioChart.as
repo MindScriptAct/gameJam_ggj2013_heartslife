@@ -1,5 +1,6 @@
 package com.mindscriptact.gdc2013.view.main.elemets {
 import adobe.utils.CustomActions;
+import com.mindscriptact.assetLibrary.AssetLibrary;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Sprite;
@@ -126,6 +127,9 @@ public class CardioChart extends Sprite {
 			_nextBeat = int.MAX_VALUE;
 			_animationFrame = 0;
 			//todo: dispatch sound event
+			
+			
+			// AssetLibrary.playMP3("soundX");
 		}
 		
 		//animate (if needed)
