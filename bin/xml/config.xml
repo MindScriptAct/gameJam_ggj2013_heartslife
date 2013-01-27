@@ -13,7 +13,7 @@
 		<startingXPos>500</startingXPos> <!-- game center x -->
 		<startingYPos>480</startingYPos><!-- game center y -->
 		
-		<moveSpeed>5</moveSpeed>   <!--hero moves pixels per frame -->
+		<moveSpeed>7</moveSpeed>   <!--hero moves pixels per frame -->
 		
 		<life>20</life>  <!--hero life point ammount (half). hero has double the amomunt for full bar. (positive AND negative) -->
 		
@@ -24,16 +24,12 @@
 	<emotionConfig>
 		<size>128</size> <!--hit circle size-->
 		<assetSize>160</assetSize> <!-- asset size-->
-		
-		<waveProgressStarting>0</waveProgressStarting>  <!-- kaip greit 'groja' bangavimas. -->
-		<waveProgressSpeed>0.2</waveProgressSpeed>  <!-- kaip greit 'groja' bangavimas. -->
-		<waveGrowRate>0.2</waveGrowRate>  <!-- Kaip greit pradeda banguoti. -->
-		
+				
 		<spawnRadius>540</spawnRadius>  <!-- radius there enemies are spawned and removed. -->
 		
-		<spawnRateStart>1000</spawnRateStart>  <!-- how often in ms new enemy spawns -->
-		<spawnRateChange>1</spawnRateChange>  <!-- how fast spawn rate is reducen each frame -->
-		<spawnRateMin>10</spawnRateMin> <!-- minimal new enemy spawn time delay in ms -->
+		<spawnRateStart>800</spawnRateStart>  <!-- how often in ms new enemy spawns -->
+		<spawnRateChange>0.5</spawnRateChange>  <!-- how fast spawn rate is reducen each frame -->
+		<spawnRateMin>100</spawnRateMin> <!-- minimal new enemy spawn time delay in ms -->
 		
 		
 		<emotionMoveSpeeed>3</emotionMoveSpeeed> <!-- enemy move minimal speed -->

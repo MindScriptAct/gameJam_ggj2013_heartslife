@@ -44,20 +44,36 @@ public class SpawnEmotionCommand extends PooledCommand {
 		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * spawnRadius;
 		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * spawnRadius;
 		
+		angle = Math.random() * Math.PI * 2;
+		var emotionTargetX:Number = heroConfig.startingXPos + Math.sin(angle) * spawnRadius / 3;
+		var emotionTargetY:Number = heroConfig.startingYPos + Math.cos(angle) * spawnRadius / 3;
+		
 		
 		var emotionConfig:EmotionsConfigVO = emotionProxy.getConfig();
-		
 		emotionData.strength = emotionProxy.getEmotionStrength(id);
 		
-		emotionData.vectorX = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
-		emotionData.vectorY = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
+		var speed:Number = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
+		emotionData.vectorX = (emotionTargetX - emotionData.x);
+		emotionData.vectorY = (emotionTargetY - emotionData.y);
 		
-		if (emotionData.x > heroConfig.startingXPos) {
+		var length:Number = Math.sqrt(emotionData.vectorX * emotionData.vectorX + emotionData.vectorY * emotionData.vectorY);
+		if (length == 0)
+			length = 0.001
+			
+		emotionData.vectorX = emotionData.vectorX/length*speed;
+		emotionData.vectorY = emotionData.vectorY/length*speed;		
+		
+		
+		//emotionData.vectorX = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
+		//emotionData.vectorY = Math.random() * emotionConfig.emotionMoveRandom + emotionConfig.emotionMoveSpeeed;
+		
+		/*if (emotionData.x > heroConfig.startingXPos) {
 			emotionData.vectorX *= -1;
 		}
 		if (emotionData.y > heroConfig.startingYPos) {
 			emotionData.vectorY *= -1;
-		}
+		}*/
+		
 		emotionProxy.addEmotion(emotionData);
 		
 		//*/

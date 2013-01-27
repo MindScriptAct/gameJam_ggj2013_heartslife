@@ -15,7 +15,7 @@ public class EmotionProxy extends Proxy {
 	
 	private var emotionDatas:Vector.<EmotionData> = new Vector.<EmotionData>();
 	
-	private var emotionsData:EmotionsInfo = new EmotionsInfo();
+	private var emotionsInfo:EmotionsInfo = new EmotionsInfo();
 	
 	private var emotionStrength:Dictionary = new Dictionary();
 	private var emotionScore:Dictionary = new Dictionary();
@@ -76,12 +76,15 @@ public class EmotionProxy extends Proxy {
 	}
 	
 	public function resetSpawnTimer():void {
-		//
+		emotionsInfo.lastSpawn = 0;
+		emotionsInfo.spawnGaps = emotionConfig.spawnRateStart;
+		emotionsInfo.minimalGaps = emotionConfig.spawnRateMin;
+		emotionsInfo.spawnReduceRate = emotionConfig.spawnRateChange;
 	}
 	
 	override protected function onRegister():void {
 		provide(emotionDatas, ProvideId.EMOTION_DATAS);
-		provide(emotionsData, ProvideId.EMOTIONS_INFO);
+		provide(emotionsInfo, ProvideId.EMOTIONS_INFO);
 	}
 	
 	override protected function onRemove():void {

@@ -21,9 +21,15 @@ public class EmotionSpawnTask extends Task {
 	override public function run():void {
 		var timer:int = getTimer();
 		
-		if (emotionsInfo.lastSpawn + emotionConfig.spawnRateStart < timer) {
+		if (emotionsInfo.lastSpawn + emotionsInfo.spawnGaps < timer) {
 			emotionsInfo.lastSpawn = timer;
 			sendFinalMessage(Message.SPAWN_EMOTION);
+		}
+		
+		emotionsInfo.spawnGaps -= emotionsInfo.spawnReduceRate;
+		
+		if (emotionsInfo.spawnGaps < emotionsInfo.minimalGaps) {
+			emotionsInfo.spawnGaps = emotionsInfo.minimalGaps
 		}
 	}
 

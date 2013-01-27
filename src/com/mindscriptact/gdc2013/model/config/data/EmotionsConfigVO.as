@@ -9,11 +9,10 @@ public class EmotionsConfigVO {
 	public var size:int;
 	public var assetSize:int;
 	
-	public var waveProgressStarting:Number;
-	public var waveProgressSpeed:Number;
-	
-	public var waveGrowRate:Number;
 	public var spawnRateStart:int;
+	public var spawnRateChange:Number;
+	public var spawnRateMin:Number;
+	
 	
 	public var emotionMoveSpeeed:Number;
 	public var emotionMoveRandom:Number;

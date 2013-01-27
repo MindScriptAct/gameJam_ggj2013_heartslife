@@ -56,23 +56,30 @@ public class MoveEmotionsTask extends Task {
 			var tempHero:Point = new Point((heroData.x - emotionData.x) * ca - (heroData.y - emotionData.y) * sa, (heroData.x - emotionData.x) * sa + (heroData.y - emotionData.y) * ca);
 			
 			//rotation change limit for one frame (max angle)
-			var angle:Number = Math.abs(heroData.heartState / heroConfig.life * maxPushAngle)
+			var followMaxAngle:Number = Math.abs(heroData.heartState / heroConfig.life * maxPullAngle)
+			var runawayMaxAngle:Number = Math.abs(heroData.heartState / heroConfig.life * maxPushAngle)
 			
-			//desired follow angle;
+			//desired angles
 			var followAngle:Number = Math.atan2(tempHero.y, tempHero.x);
+			followAngle = minimize(followAngle);
 			
-			//desired run away angle;
-			var runawayAngle:Number = (followAngle > 0) ? followAngle - Math.PI : followAngle - Math.PI;
+			var runawayAngle:Number = (followAngle > 0) ? followAngle - Math.PI : followAngle + Math.PI;
 			
-			if (Math.abs(angle) < Math.abs(followAngle)) {
-				followAngle = angle * followAngle / Math.abs(followAngle);
+			if (Math.abs(followMaxAngle) < Math.abs(followAngle)) {
+				if (followAngle == 0)
+					followAngle = 0;
+				else
+					followAngle = followMaxAngle * followAngle / Math.abs(followAngle);
 			}
 			
-			if (Math.abs(angle) < Math.abs(runawayAngle)) {
-				runawayAngle = angle * runawayAngle / Math.abs(runawayAngle);
+			if (Math.abs(runawayMaxAngle) < Math.abs(runawayAngle)) {
+				if (runawayAngle == 0)
+					runawayAngle = 0;
+				else
+					runawayAngle = runawayMaxAngle * runawayAngle / Math.abs(runawayAngle);
 			}
 			
-			angle = runawayAngle;
+			var angle:Number;
 			
 			//determine if run or follow
 			if (heroData.heartState > 0) {
@@ -110,8 +117,6 @@ public class MoveEmotionsTask extends Task {
 			var newDist:int = distX * distX + distY * distY;
 			
 			if (newDist > distance) {
-				//emotionData.x = centerPointX + (centerPointX - emotionData.x);
-				//emotionData.y = centerPointY + (centerPointY - emotionData.y);
 				sendPostMessage(Message.REMOVE_EMOTION, emotionData);
 			}
 			
@@ -121,6 +126,19 @@ public class MoveEmotionsTask extends Task {
 			
 		}
 	
+	}
+	
+	private function minimize(targetAngle:Number):Number 
+	{
+		if (Math.abs(targetAngle) > Math.PI)
+		{
+			if (targetAngle > 0)
+				return targetAngle - Math.PI;
+			else
+				return targetAngle + Math.PI;
+		}
+		
+		return targetAngle;
 	}
 
 }
