@@ -37,7 +37,7 @@ public class PreloadProxy extends Proxy {
 	private function doNextStep():void {
 		if (preloadingStep == PreloadSteps.PRELOAD_PERNAMENTS) {
 			var assetLibIndex:AssetLibraryIndex = AssetLibrary.getIndex();
-			assetLibIndex.addAssetsFromXML("xml/Assets.xml");
+			assetLibIndex.addAssetsFromXML("xml/assets.xml");
 			
 			assetLibLoader = AssetLibrary.getLoader();
 			assetLibLoader.addEventListener(AssetEvent.ALL_PERMANENTS_LOADED, handleAllPernamentsLoaded);
@@ -68,6 +68,8 @@ public class PreloadProxy extends Proxy {
 		
 		preloadingStep = PreloadSteps.PRELOAD_CONFIG;
 		
+		AssetLibrary.playMP3("back_music", 0, int.MAX_VALUE);
+		
 		doNextStep();
 	}
 	
@@ -82,7 +84,6 @@ public class PreloadProxy extends Proxy {
 		provide(config.gameConfig, ProvideId.GAME_CONFIG);
 		provide(config.heroConfig, ProvideId.HERO_CONFIG);
 		provide(config.emotionConfig, ProvideId.EMOTION_CONFIG);
-		
 		
 		MoveEmotionsTask.maxPullAngle = Math.PI / 180 * config.emotionConfig.maxPull;
 		MoveEmotionsTask.maxPushAngle = Math.PI / 180 * config.emotionConfig.maxPush;

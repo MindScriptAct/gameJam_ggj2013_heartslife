@@ -30,7 +30,12 @@
 	</path>
 	
 	<path id="mp3Dir" url="mp3/">
-		<!-- <file assetId="soundX" fileName="saundX.mp3" permanent="true"/>-->
+		<file assetId="heart1" fileName="heart1.mp3" permanent="true"/>
+		<file assetId="heart2" fileName="heart2.mp3" permanent="true"/>
+		<file assetId="eat" fileName="eat.mp3" permanent="true"/>
+		<file assetId="heart_death" fileName="heart_death.mp3" permanent="true"/>
+		<file assetId="heart_beep" fileName="heart_beep.mp3" permanent="true"/>
+		<file assetId="back_music" fileName="back_music.mp3" permanent="true"/>
 	</path>
 	
 	<!-- EXAMPLE	

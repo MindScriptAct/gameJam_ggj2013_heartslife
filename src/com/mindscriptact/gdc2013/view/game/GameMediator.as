@@ -60,6 +60,8 @@ public class GameMediator extends Mediator {
 		addHandler(DataMessage.All_EMOTIONS_REMOVED, handleAllEmotionRemove);
 		
 		addHandler(Message.SHOW_SCREEN, handleShowScreen);
+		
+		addHandler(DataMessage.HERO_HEART_CHANGED, handleHeartChange);
 	
 		//addHandler(Message.HIDE_LOADER, showCollorTest);
 	
@@ -70,6 +72,25 @@ public class GameMediator extends Mediator {
 		//addHandler(KeyMessage.KEY_ADD, handleKeyPress);
 		//addHandler(KeyMessage.KEY_SUBTRACT, handleKeyPress);
 	
+	}
+	
+	private function handleHeartChange(heartState:int):void {
+		//trace( "GameMediator.handleHeartChange > heartState : " + heartState );
+		
+		if (heroImage_neg && heroImage_pos) {
+			if (heartState < 0) {
+				heroImage_pos.visible = true;
+				heroImage_pos.alpha = heartState / -20;
+			} else {
+				heroImage_pos.visible = false;
+			}
+			if (heartState > 0) {
+				heroImage_neg.visible = true;
+				heroImage_neg.alpha = heartState / 20;
+			} else {
+				heroImage_neg.visible = false;
+			}
+		}
 	}
 	
 	private function handleAllEmotionRemove(blank:Object):void {
@@ -151,8 +172,6 @@ public class GameMediator extends Mediator {
 		elementHolder.addChild(heroSprite);
 		
 		var assetSize:int = heroProxy.getAssetSize();
-		
-		
 		
 		heroImage_norm = new Image(heroTextureNorm);
 		heroSprite.addChild(heroImage_norm);

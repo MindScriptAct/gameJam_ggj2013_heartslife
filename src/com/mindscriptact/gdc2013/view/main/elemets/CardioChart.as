@@ -11,6 +11,7 @@ import flash.geom.ColorTransform;
 import flash.geom.Matrix;
 import flash.geom.Point;
 import flash.geom.Rectangle;
+import flash.media.SoundTransform;
 import flash.utils.getTimer;
 import starling.animation.Transitions;
 import starling.animation.Tween;
@@ -39,6 +40,7 @@ public class CardioChart extends Sprite {
 	private var _dotMatrix:Matrix;
 	
 	private var _nextBeat:uint;
+	private var _nextSound:uint;
 	private var _animationFrame:int;
 	
 	private var _currentPos:int = 0;
@@ -50,6 +52,9 @@ public class CardioChart extends Sprite {
 	private var _filterRect:Rectangle;
 	private var _zeroPoint:Point;
 	
+	private var _soundTransform:SoundTransform;
+	private var _maxAmplitude:int;
+	
 	public function CardioChart(width:int, height:int, steps:int, color:uint, maxAmplitude:int) {
 		_bitmapWidth = width;
 		_bitmapHeight = height;
@@ -58,7 +63,8 @@ public class CardioChart extends Sprite {
 		_color = color;
 		
 		_zeroPoint = new Point(0, 0);
-		_bitmapData = new BitmapData(_bitmapWidth, maxAmplitude * 2 + 1+20, true, 0x00000000);
+		_maxAmplitude = maxAmplitude;
+		_bitmapData = new BitmapData(_bitmapWidth, maxAmplitude * 2 + 1 + 20, true, 0x00000000);
 		
 		_bitmap = new Bitmap(_bitmapData);
 		_bitmapRect = new Rectangle(0, 0, _bitmapWidth, _bitmapData.height);
@@ -73,6 +79,8 @@ public class CardioChart extends Sprite {
 		_glowFilter = new GlowFilter(_color, 0.4, 6, 6, 2);
 		_filterRect = new Rectangle(0, 0, _scrollSpeed, _bitmapRect.height);
 		
+		_soundTransform = new SoundTransform();
+		
 		reset();
 	}
 	
@@ -86,12 +94,12 @@ public class CardioChart extends Sprite {
 		_dotPos.y = Math.floor(_bitmapData.height / 2);
 		
 		_nextBeat = getTimer() + _delay;
+		_nextSound = int.MAX_VALUE;
 		
 		_bitmapData.lock();
 		_bitmapData.fillRect(_bitmapRect, 0x00000000);
 		
-		for (var i:int = 0; i < _bitmapRect.width; i = i + _scrollSpeed)
-		{
+		for (var i:int = 0; i < _bitmapRect.width; i = i + _scrollSpeed) {
 			onEnterFrame(null, true);
 		}
 		
@@ -128,8 +136,15 @@ public class CardioChart extends Sprite {
 			_animationFrame = 0;
 			//todo: dispatch sound event
 			
-			
-			// AssetLibrary.playMP3("soundX");
+			_nextSound = getTimer() + _delay * 0.5;
+			AssetLibrary.playMP3("heart1", 0, 0, _soundTransform);
+				//todo(auk);
+		}
+		
+		if ((getTimer() > _nextSound) && (_nextSound != int.MAX_VALUE)) {
+			_nextSound = int.MAX_VALUE;
+			AssetLibrary.playMP3("heart2", 0, 0, _soundTransform);
+				//todo(mazek);
 		}
 		
 		//animate (if needed)
@@ -188,6 +203,9 @@ public class CardioChart extends Sprite {
 				return _amplitude * 0.25
 				break;
 			case 6: 
+				_soundTransform.volume *= 0.25;
+				AssetLibrary.playMP3("heart_beep", 0, 0, _soundTransform);
+				_soundTransform.volume *= 4;
 				return _amplitude * 0.5
 				break;
 			case 7: 
@@ -244,6 +262,7 @@ public class CardioChart extends Sprite {
 	}
 	
 	public function set amplitude(value:Number):void {
+		_soundTransform.volume = 0.4 + 0.6 * (Math.abs(_amplitude) / _maxAmplitude);
 		_amplitude = value;
 	}
 	
@@ -274,4 +293,4 @@ public class CardioChart extends Sprite {
 		return _currentPos;
 	}
 }
-}	
+}

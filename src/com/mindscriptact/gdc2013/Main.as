@@ -35,6 +35,9 @@ public class Main extends Sprite {
 		}
 		
 		// start
+		
+		
+		
 		new GameModule().start(this);
 	
 	}

@@ -1,4 +1,5 @@
 package com.mindscriptact.gdc2013.contoller.emotions {
+import com.mindscriptact.assetLibrary.AssetLibrary;
 import com.mindscriptact.gdc2013.constants.ScreenIds;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
@@ -44,6 +45,8 @@ public class ConsumeEmotionCommand extends PooledCommand {
 			gameProxy.increaseScore((comboSize-emotionConfig.comboStarts) * emotionConfig.comboScores);
 		}
 		
+		//emotionProxy.removeAll();
+		
 		// change life
 		heroProxy.changeHeart(emotionProxy.getEmotionStrength(emotion.emotionId));
 		
@@ -51,9 +54,11 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		var heartState:int = heroProxy.getHeartState();
 		var life:int = heroProxy.getHeroConfig().life;
 		if (heartState >= life) {
+			//AssetLibrary.playMP3("heart_death",0,1);
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		if (heartState <= -life) {
+			//AssetLibrary.playMP3("heart_death",0,1);
 			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 		}
 		
