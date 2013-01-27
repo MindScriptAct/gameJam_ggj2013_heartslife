@@ -9,6 +9,9 @@ public class HeroData {
 	public var x:int;
 	public var y:int;
 	
+	public var speedX:Number;
+	public var speedY:Number;
+	
 	public var heartState:int;
 
 }

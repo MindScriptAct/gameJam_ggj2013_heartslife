@@ -5,11 +5,15 @@ import flash.display.BitmapData;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.filters.BlurFilter;
+import flash.filters.GlowFilter;
 import flash.geom.ColorTransform;
 import flash.geom.Matrix;
 import flash.geom.Point;
 import flash.geom.Rectangle;
 import flash.utils.getTimer;
+import starling.animation.Transitions;
+import starling.animation.Tween;
+import starling.core.Starling;
 
 /**
  * ...
@@ -41,6 +45,10 @@ public class CardioChart extends Sprite {
 	private var _amplitude:Number = 50;
 	private var _delay:int = 500;
 	
+	private var _glowFilter:GlowFilter;
+	private var _filterRect:Rectangle;
+	private var _zeroPoint:Point;
+	
 	public function CardioChart(width:int, height:int, steps:int, color:uint, maxAmplitude:int) {
 		_bitmapWidth = width;
 		_bitmapHeight = height;
@@ -48,7 +56,8 @@ public class CardioChart extends Sprite {
 		_steps = steps;
 		_color = color;
 		
-		_bitmapData = new BitmapData(_bitmapWidth, maxAmplitude * 2 + 1, true, 0x00000000);
+		_zeroPoint = new Point(0, 0);
+		_bitmapData = new BitmapData(_bitmapWidth, maxAmplitude * 2 + 1+20, true, 0x00000000);
 		
 		_bitmap = new Bitmap(_bitmapData);
 		_bitmapRect = new Rectangle(0, 0, _bitmapWidth, _bitmapData.height);
@@ -59,6 +68,9 @@ public class CardioChart extends Sprite {
 		_dotRect = new Rectangle(0, 0, _dotBitmap.width, _dotBitmap.height);
 		_dotPos = new Point(0, Math.floor(_bitmapData.height / 2));
 		_dotMatrix = new Matrix();
+		
+		_glowFilter = new GlowFilter(_color, 0.4, 6, 6, 2);
+		_filterRect = new Rectangle(0, 0, _scrollSpeed, _bitmapRect.height);
 		
 		reset();
 	}
@@ -77,11 +89,10 @@ public class CardioChart extends Sprite {
 		_bitmapData.lock();
 		_bitmapData.fillRect(_bitmapRect, 0x00000000);
 		
-		for (var i:int = 0; i < _bitmapWidth; i++) {
-			_dotPos.x = i;
-			_bitmapData.copyPixels(_dotBitmap, _dotRect, _dotPos, null, null, true);
+		for (var i:int = 0; i < _bitmapRect.width; i = i + _scrollSpeed)
+		{
+			onEnterFrame(null, true);
 		}
-		_dotPos.x = 0;
 		
 		_bitmapData.unlock();
 	}
@@ -98,8 +109,10 @@ public class CardioChart extends Sprite {
 			removeEventListener(Event.ENTER_FRAME, onEnterFrame);
 	}
 	
-	private function onEnterFrame(e:Event):void {
-		_bitmapData.lock();
+	private function onEnterFrame(e:Event, startup:Boolean = false):void {
+		
+		if (!startup)
+			_bitmapData.lock();
 		
 		//scroll and clear
 		_bitmapData.scroll(_scrollSpeed, 0);
@@ -112,6 +125,7 @@ public class CardioChart extends Sprite {
 		if ((getTimer() > _nextBeat) && (_nextBeat != int.MAX_VALUE)) {
 			_nextBeat = int.MAX_VALUE;
 			_animationFrame = 0;
+			//todo: dispatch sound event
 		}
 		
 		//animate (if needed)
@@ -137,7 +151,10 @@ public class CardioChart extends Sprite {
 		drawPixel();
 		//end of draw smooth curve
 		
-		_bitmapData.unlock();
+		_bitmapData.applyFilter(_bitmapData, _filterRect, _zeroPoint, _glowFilter);
+		
+		if (!startup)
+			_bitmapData.unlock();
 	}
 	
 	private function drawPixel():void {
@@ -195,9 +212,11 @@ public class CardioChart extends Sprite {
 	}
 	
 	private function updateBitmapPos():void {
-		// TODO : add tween..
+		
 		var maxOffset:int = (_bitmapHeight - _bitmapData.height) / 2;
-		_bitmap.y = maxOffset + maxOffset * (_currentPos / _steps);
+		var tween:Tween = new Tween(_bitmap, 0.2, Transitions.EASE_IN_OUT);
+		tween.moveTo(_bitmap.x, maxOffset + maxOffset * (_currentPos / _steps));
+		Starling.juggler.add(tween);
 	}
 	
 	public function add(value:int = 1):void {
@@ -251,4 +270,4 @@ public class CardioChart extends Sprite {
 		return _currentPos;
 	}
 }
-}
+}	
