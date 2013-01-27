@@ -60,7 +60,7 @@ public class MoveEmotionsTask extends Task {
 			
 			var positiveEngle:Boolean = (emotionData.vectorX * pointY - emotionData.vectorY * pointX) > 0;
 			
-			if (positiveEngle) {
+			if (positiveEngle) { 
 				if (emotionData.strength > 0) { // raudonas
 					if (heroData.heartState > 0) { // imt raudona
 						

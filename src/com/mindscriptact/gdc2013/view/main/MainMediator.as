@@ -29,6 +29,7 @@ public class MainMediator extends Mediator {
 	private var heartTestlabel:Label;
 	
 	private var uiSprite:Sprite;
+	private var cardio:CardioChart;
 	
 	[Inject]
 	public var view:Main;
@@ -42,8 +43,29 @@ public class MainMediator extends Mediator {
 		uiSprite = new Sprite();
 		view.addChild(uiSprite);
 		
-		//var cardio:CardioChart = 
+		cardio = new CardioChart(160, 515, 20, 0xFFFFFF, 50);
+		uiSprite.addChild(cardio);
+		cardio.x = 1040;
+		cardio.y = 190;
+		cardio.start();
 		
+		//cardio.amplitude = 50;
+		//cardio.delay = 150;
+		//cardio.add(20)
+		
+		//cardio.amplitude = 0;
+		//cardio.delay = 1000;
+		//cardio.substract(20);
+		
+		//cardio.delay = 10;
+		//cardio.x = 1040;
+		//cardio.y = 400 - 200;
+		//
+		//
+		//
+		//cardio.delay = 300;
+		//cardio.x = 1040;
+		//cardio.y = 400 + 200;		
 		
 		CONFIG::debug {
 			debugSprite = new Sprite();
@@ -62,6 +84,18 @@ public class MainMediator extends Mediator {
 	CONFIG::debug
 	private function handleHeroHeartChange(heartStat:int):void {
 		heartTestlabel.text = String(heartStat);
+		
+		//cardio.currentPos
+		
+		cardio.add(cardio.currentPos - heartStat);
+		
+		
+		cardio.amplitude = 50 * (1 - (cardio.currentPos + 20) / 40);
+		
+		cardio.delay = 1000 * ( (cardio.currentPos + 20) / 40);
+		
+		
+	
 	}
 	
 	CONFIG::debug
@@ -108,12 +142,15 @@ public class MainMediator extends Mediator {
 		switch (screenName) {
 			case ScreenIds.START: 
 				screen = new StartScreenSPR();
+				cardio.pause();
 				break;
 			case ScreenIds.GAME: 
 				screen = new GameScreenSPR();
+				cardio.start();
 				break;
 			case ScreenIds.GAMEOVER: 
 				screen = new GameOverScreenSPR();
+				cardio.pause();
 				break;
 			default: 
 				throw Error("TODO")

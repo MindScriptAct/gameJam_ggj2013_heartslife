@@ -12,6 +12,9 @@ public class KeyMessage {
 	static public const KEY_RIGHT:String = "keyRight";
 	static public const KEY_SUBTRACT:String = "keySubtract";
 	static public const KEY_ADD:String = "keyAdd";
+	
+	static public const KEY_F2:String = "keyF2";
+	static public const KEY_F3:String = "keyF3";
 
 }
 }

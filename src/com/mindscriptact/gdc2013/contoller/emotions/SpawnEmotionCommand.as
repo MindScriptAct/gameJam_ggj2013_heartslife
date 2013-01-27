@@ -20,6 +20,27 @@ public class SpawnEmotionCommand extends PooledCommand {
 	
 	public function execute(blank:Object):void {
 		
+		
+		//var id:int = 1
+		//
+		//var emotionData:EmotionData = new EmotionData(id);
+		//
+		//emotionData.x
+		//emotionData.y
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//*
+		
 		// todo
 		var id:int = Math.floor(Math.random() * 6) + 1;
 		var emotionData:EmotionData = new EmotionData(id);
@@ -49,6 +70,8 @@ public class SpawnEmotionCommand extends PooledCommand {
 			emotionData.vectorY *= -1;
 		}
 		emotionProxy.addEmotion(emotionData);
+		
+		//*/
 	}
 
 }

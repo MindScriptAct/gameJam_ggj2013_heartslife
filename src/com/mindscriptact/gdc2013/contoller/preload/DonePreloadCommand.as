@@ -18,7 +18,6 @@ public class DonePreloadCommand extends Command {
 	
 	public function execute(blank:Object):void {
 		
-		
 		sendMessage(Message.INIT_GAME_ELEMENT);
 		
 		sendMessage(Message.HIDE_LOADER);
@@ -30,6 +29,11 @@ public class DonePreloadCommand extends Command {
 		
 		//keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_SUBTRACT, KeyMessage.KEY_SUBTRACT);
 		//keyboardProxy.registerMessageSendOnPress(Keyboard.NUMPAD_ADD, KeyMessage.KEY_ADD);
+		
+		CONFIG::debug {
+			keyboardProxy.registerMessageSendOnPress(Keyboard.F2, KeyMessage.KEY_F2);
+			keyboardProxy.registerMessageSendOnPress(Keyboard.F3, KeyMessage.KEY_F3);
+		}
 		
 		sendMessage(Message.SHOW_SCREEN, ScreenIds.START);
 	}

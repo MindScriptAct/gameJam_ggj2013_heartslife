@@ -195,6 +195,7 @@ public class CardioChart extends Sprite {
 	}
 	
 	private function updateBitmapPos():void {
+		// TODO : add tween..
 		var maxOffset:int = (_bitmapHeight - _bitmapData.height) / 2;
 		_bitmap.y = maxOffset + maxOffset * (_currentPos / _steps);
 	}
@@ -244,6 +245,10 @@ public class CardioChart extends Sprite {
 	
 	override public function get height():Number {
 		return _bitmapHeight;
+	}
+	
+	public function get currentPos():int {
+		return _currentPos;
 	}
 }
 }
