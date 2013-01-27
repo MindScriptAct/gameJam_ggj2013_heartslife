@@ -142,10 +142,8 @@ public class CardioChart extends Sprite {
 			
 			_nextSound = getTimer() + _delay * 0.5;
 			AssetLibrary.playMP3("heart1", 0, 0, _soundTransform);
-				
 			
-			if (heroImage != null)
-			{
+			if (heroImage != null) {
 				var imageTween:Tween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
 				imageTween.scaleTo(1.1);
 				Starling.juggler.add(imageTween);
@@ -155,13 +153,12 @@ public class CardioChart extends Sprite {
 		if ((getTimer() > _nextSound) && (_nextSound != int.MAX_VALUE)) {
 			_nextSound = int.MAX_VALUE;
 			AssetLibrary.playMP3("heart2", 0, 0, _soundTransform);
-
-			if (heroImage != null)
-			{
+			
+			if (heroImage != null) {
 				var imageTween:Tween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
 				imageTween.scaleTo(0.9);
 				Starling.juggler.add(imageTween);
-			}			
+			}
 		}
 		
 		//animate (if needed)
