@@ -17,6 +17,7 @@ import flash.utils.getTimer;
 import starling.animation.Transitions;
 import starling.animation.Tween;
 import starling.core.Starling;
+import starling.display.Image;
 
 /**
  * ...
@@ -55,6 +56,8 @@ public class CardioChart extends Sprite {
 	
 	private var _soundTransform:SoundTransform;
 	private var _maxAmplitude:int;
+	
+	public static var heroImage:Image;
 	
 	public function CardioChart(width:int, height:int, steps:int, color:uint, maxAmplitude:int) {
 		_bitmapWidth = width;
@@ -139,13 +142,26 @@ public class CardioChart extends Sprite {
 			
 			_nextSound = getTimer() + _delay * 0.5;
 			AssetLibrary.playMP3("heart1", 0, 0, _soundTransform);
-				//todo(auk);
+				
+			
+			if (heroImage != null)
+			{
+				var imageTween:Tween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
+				imageTween.scaleTo(1.1);
+				Starling.juggler.add(imageTween);
+			}
 		}
 		
 		if ((getTimer() > _nextSound) && (_nextSound != int.MAX_VALUE)) {
 			_nextSound = int.MAX_VALUE;
 			AssetLibrary.playMP3("heart2", 0, 0, _soundTransform);
-				//todo(mazek);
+
+			if (heroImage != null)
+			{
+				var imageTween:Tween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
+				imageTween.scaleTo(0.9);
+				Starling.juggler.add(imageTween);
+			}			
 		}
 		
 		//animate (if needed)

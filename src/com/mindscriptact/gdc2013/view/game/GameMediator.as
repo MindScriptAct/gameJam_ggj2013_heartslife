@@ -12,11 +12,14 @@ import com.mindscriptact.gdc2013.model.config.data.EmotionVO;
 import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
+import com.mindscriptact.gdc2013.view.main.elemets.CardioChart;
 import flash.display.Bitmap;
 import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import org.mvcexpress.mvc.Mediator;
+import starling.core.Starling;
 import starling.display.Image;
+import starling.display.Quad;
 import starling.display.Sprite;
 import starling.textures.Texture;
 
@@ -70,10 +73,10 @@ public class GameMediator extends Mediator {
 		//addHandler(KeyMessage.KEY_LEFT, handleKeyPress);
 		//addHandler(KeyMessage.KEY_RIGHT, handleKeyPress);
 		//addHandler(KeyMessage.KEY_ADD, handleKeyPress);
-		//addHandler(KeyMessage.KEY_SUBTRACT, handleKeyPress);
-	
+		//addHandler(KeyMessage.KEY_SUBTRACT, handleKeyPress);		
 	}
 	
+	//todo:hero image
 	private function handleHeartChange(heartState:int):void {
 		//trace( "GameMediator.handleHeartChange > heartState : " + heartState );
 		
@@ -158,6 +161,12 @@ public class GameMediator extends Mediator {
 			
 			emotionTextures[emotion.id] = Texture.fromBitmap(emotionBitma);
 		}
+		
+		var bg:Quad = new Quad(1270, 950, 0x373737, false);
+		bg.x = 5;
+		bg.y = 5;
+		view.addChild(bg)
+		
 		// add element holder.
 		elementHolder = new Sprite();
 		view.addChild(elementHolder);
@@ -192,8 +201,15 @@ public class GameMediator extends Mediator {
 		
 		heroImage = new Image(heroTexture);
 		heroSprite.addChild(heroImage);
-		heroImage.pivotX = assetSize >> 1;
-		heroImage.pivotY = assetSize >> 1;
+		//TODO: Refactor!!!!
+		heroImage.pivotX = (assetSize >> 1) + heroImage.width*0.1; 
+		heroImage.pivotY = (assetSize >> 1) + heroImage.height*0.1;
+		heroImage.x += 18;
+		heroImage.y += 18;
+		
+		//TODO: Refactor!!!!
+		CardioChart.heroImage = heroImage;
+		
 		
 		handleHeroPositionSet();
 		
