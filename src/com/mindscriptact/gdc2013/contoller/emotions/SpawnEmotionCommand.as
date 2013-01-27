@@ -28,17 +28,6 @@ public class SpawnEmotionCommand extends PooledCommand {
 		//emotionData.x
 		//emotionData.y
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		//*
 		
 		// todo
