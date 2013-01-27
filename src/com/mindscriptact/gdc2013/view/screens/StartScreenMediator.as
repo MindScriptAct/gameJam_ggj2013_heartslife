@@ -20,8 +20,11 @@ public class StartScreenMediator extends Mediator {
 		addListener(view.flashButton, MouseEvent.CLICK, handleFlashLinkButton);
 		addListener(view.mvcExpressButton, MouseEvent.CLICK, handleExpressLinkButton);
 		
-		addListener(view.blogButton, MouseEvent.CLICK, handleBlogLinkButton);
-		addListener(view.twitterButton, MouseEvent.CLICK, handleTwitterLinkButton);
+		addListener(view.link1, MouseEvent.CLICK, handleLink1);
+		addListener(view.link2, MouseEvent.CLICK, handleLink2);
+		addListener(view.link3, MouseEvent.CLICK, handleLink3);
+		addListener(view.link4, MouseEvent.CLICK, handleLink4);
+		addListener(view.link5, MouseEvent.CLICK, handleLink5);
 	}
 	
 	private function handleStartGame(event:MouseEvent):void {
@@ -44,13 +47,24 @@ public class StartScreenMediator extends Mediator {
 		navigateToURL(new URLRequest("http://gamua.com/starling/"), "_blank");
 	}
 	
-	private function handleBlogLinkButton(event:MouseEvent):void {
+	private function handleLink1(event:MouseEvent):void {
 		navigateToURL(new URLRequest("http://www.mindscriptact.com/"), "_blank");
 	}
 	
-	private function handleTwitterLinkButton(event:MouseEvent):void {
-		navigateToURL(new URLRequest("https://twitter.com/Deril"), "_blank");
+	private function handleLink2(event:MouseEvent):void {
+		navigateToURL(new URLRequest("http://www.pinstudios.com/"), "_blank");
 	}
-
+	
+	private function handleLink3(event:MouseEvent):void {
+		navigateToURL(new URLRequest("http://mantasim.blogspot.com/"), "_blank");
+	}
+	
+	private function handleLink4(event:MouseEvent):void {
+		navigateToURL(new URLRequest("http://www.plastmassive.lt/"), "_blank");
+	}
+	
+	private function handleLink5(event:MouseEvent):void {
+		navigateToURL(new URLRequest("http://www.youtube.com/kbielinis"), "_blank");
+	}
 }
 }

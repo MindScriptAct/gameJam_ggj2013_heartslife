@@ -30,33 +30,34 @@ public class MoveHeroTask extends Task {
 		
 		if (keyDictionary[Keyboard.UP] as Boolean) {
 			heroData.speedY += (-heroConfig.moveSpeed - heroData.speedY) * speedEasing;
-			//heroData.y -= heroConfig.moveSpeed;
+				//heroData.y -= heroConfig.moveSpeed;
 		}
 		if (keyDictionary[Keyboard.DOWN] as Boolean) {
 			heroData.speedY += (heroConfig.moveSpeed - heroData.speedY) * speedEasing;
-			//heroData.y += heroConfig.moveSpeed;
+				//heroData.y += heroConfig.moveSpeed;
 		}
-		if (!(keyDictionary[Keyboard.UP] as Boolean) && !(keyDictionary[Keyboard.DOWN] as Boolean))
-		{
+		if (!(keyDictionary[Keyboard.UP] as Boolean) && !(keyDictionary[Keyboard.DOWN] as Boolean)) {
 			heroData.speedY *= speedEasing;
 			if (Math.abs(heroData.speedY) <= 0.05)
-				heroData.speedY = 0;			
+				heroData.speedY = 0;
 		}
 		
 		if (keyDictionary[Keyboard.LEFT] as Boolean) {
 			heroData.speedX += (-heroConfig.moveSpeed - heroData.speedX) * speedEasing;
-			//heroData.x -= heroConfig.moveSpeed;
+				//heroData.x -= heroConfig.moveSpeed;
 		}
 		if (keyDictionary[Keyboard.RIGHT] as Boolean) {
 			heroData.speedX += (heroConfig.moveSpeed - heroData.speedX) * speedEasing;
-			//heroData.x += heroConfig.moveSpeed;
+				//heroData.x += heroConfig.moveSpeed;
 		}
-		if (!(keyDictionary[Keyboard.LEFT] as Boolean) && !(keyDictionary[Keyboard.RIGHT] as Boolean))
-		{
+		if (!(keyDictionary[Keyboard.LEFT] as Boolean) && !(keyDictionary[Keyboard.RIGHT] as Boolean)) {
 			heroData.speedX *= speedEasing;
 			if (Math.abs(heroData.speedX) <= 0.05)
 				heroData.speedX = 0;
-		}		
+		}
+		
+		var prevX:Number = heroData.x;
+		var prevY:Number = heroData.y;
 		
 		heroData.x += heroData.speedX;
 		heroData.y += heroData.speedY;
@@ -69,19 +70,10 @@ public class MoveHeroTask extends Task {
 		var newDistance:int = distX * distX + distY * distY;
 		
 		if (newDistance > distance) {
-			if (keyDictionary[Keyboard.UP] as Boolean) {
-				heroData.y += heroConfig.moveSpeed;
-			}
-			if (keyDictionary[Keyboard.DOWN] as Boolean) {
-				heroData.y -= heroConfig.moveSpeed;
-			}
-			if (keyDictionary[Keyboard.LEFT] as Boolean) {
-				heroData.x += heroConfig.moveSpeed;
-			}
-			if (keyDictionary[Keyboard.RIGHT] as Boolean) {
-				heroData.x -= heroConfig.moveSpeed;
-			}
-			
+			heroData.x = prevX;
+			heroData.y = prevY;
+			heroData.speedX = 0;
+			heroData.speedY = 0;
 		}
 		
 		heroView.x = heroData.x;
