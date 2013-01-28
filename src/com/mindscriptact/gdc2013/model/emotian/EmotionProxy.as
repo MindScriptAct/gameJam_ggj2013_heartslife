@@ -52,7 +52,7 @@ public class EmotionProxy extends Proxy {
 		for (var i:int = 0; i < emotionDatas.length; i++) {
 			if (emotion == emotionDatas[i]) {
 				emotionDatas.splice(i, 1);
-				sendMessage(DataMessage.EMOTION_REMOVED, i);
+				sendMessage(DataMessage.EMOTION_REMOVED, {nr: i, instant: emotion.outOfBounds});
 				break;
 			}
 		}
