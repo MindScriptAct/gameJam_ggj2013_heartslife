@@ -217,9 +217,9 @@ public class CardioChart extends Sprite {
 				return _amplitude * 0.25
 				break;
 			case 6: 
-				_soundTransform.volume *= 0.25;
+				_soundTransform.volume *= 0.1;
 				AssetLibrary.playMP3("heart_beep", 0, 0, _soundTransform);
-				_soundTransform.volume *= 4;
+				_soundTransform.volume *= 10;
 				return _amplitude * 0.5
 				break;
 			case 7: 
@@ -276,7 +276,7 @@ public class CardioChart extends Sprite {
 	}
 	
 	public function set amplitude(value:Number):void {
-		_soundTransform.volume = 0.4 + 0.6 * (Math.abs(_amplitude) / _maxAmplitude);
+		_soundTransform.volume = 0.6 + 0.4 * (Math.abs(_amplitude) / _maxAmplitude);
 		_amplitude = value;
 	}
 	

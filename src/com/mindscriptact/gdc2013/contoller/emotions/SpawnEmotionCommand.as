@@ -40,8 +40,8 @@ public class SpawnEmotionCommand extends PooledCommand {
 		
 		var spawnRadius:int = emotionProxy.getEnemySpawnRadius() - 2
 		
-		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * spawnRadius;
-		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * spawnRadius;
+		emotionData.x = heroConfig.startingXPos + Math.sin(angle) * (spawnRadius-20);
+		emotionData.y = heroConfig.startingYPos + Math.cos(angle) * (spawnRadius-20);
 		
 		angle = Math.random() * Math.PI * 2;
 		var emotionTargetX:Number = heroConfig.startingXPos + Math.sin(angle) * spawnRadius / 3;

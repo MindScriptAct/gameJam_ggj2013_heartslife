@@ -18,6 +18,7 @@ import flash.display.Bitmap;
 import flash.display.Shape;
 import flash.display.Sprite;
 import flash.events.Event;
+import flash.media.SoundTransform;
 import org.mvcexpress.mvc.Mediator;
 
 /**
@@ -36,7 +37,9 @@ public class MainMediator extends Mediator {
 	private var uiSprite:Sprite;
 	private var cardio:CardioChart;
 	private var maxLife:int
-	private var currentScreen:String;
+	
+	//TODO: HACK!!!
+	public static var currentScreen:String;
 	
 	[Inject]
 	public var view:Main;
@@ -187,7 +190,10 @@ public class MainMediator extends Mediator {
 				case ScreenIds.GAMEOVER: 
 					screen = new GameOverScreenSPR();
 					cardio.pause();
-					AssetLibrary.playMP3("heart_death");
+					
+					var soundTransform:SoundTransform = new SoundTransform(0.05);
+					AssetLibrary.playMP3("heart_death", 0, 0, soundTransform);
+					AssetLibrary.playMP3("heart_splash");
 					break;
 				default: 
 					throw Error("TODO")
