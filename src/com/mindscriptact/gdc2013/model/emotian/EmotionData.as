@@ -16,6 +16,8 @@ public class EmotionData {
 	
 	public var rotation:Number;
 	
+	public var outOfBounds:Boolean;
+	
 	public function EmotionData(emotionId:int) {
 		this.emotionId = emotionId;
 	

@@ -117,6 +117,7 @@ public class MoveEmotionsTask extends Task {
 			var newDist:int = distX * distX + distY * distY;
 			
 			if (newDist > distance) {
+				emotionData.outOfBounds = true;
 				sendPostMessage(Message.REMOVE_EMOTION, emotionData);
 			}
 			

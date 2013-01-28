@@ -17,6 +17,7 @@ import flash.display.Bitmap;
 import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import org.mvcexpress.mvc.Mediator;
+import starling.animation.Tween;
 import starling.core.Starling;
 import starling.display.Image;
 import starling.display.Quad;
@@ -36,7 +37,8 @@ public class GameMediator extends Mediator {
 	private var backGroundImage:Image;
 	private var elementHolder:Sprite;
 	
-	private var heroSprite:Sprite;
+	//TODO: HACK!!!
+	public static var heroSprite:Sprite;
 	private var heroImage:Image;
 	private var heroImage_norm:Image;
 	private var heroImage_pos:Image;
@@ -103,16 +105,39 @@ public class GameMediator extends Mediator {
 		}
 	}
 	
-	private function handleEmotionRemove(nr:int):void {
-		var emotionSpawn:Image = emotionViews[nr];
-		elementHolder.removeChild(emotionSpawn);
-		emotionViews.splice(nr, 1);
+
+	private function handleEmotionRemove(data:Object):void {
+		var emotionSpawn:Image = emotionViews[data["nr"]];
+		
+		if (data["instant"])
+		{
+			elementHolder.removeChild(emotionSpawn);
+		}
+		else
+		{
+			var tween:Tween = new Tween(emotionSpawn, 0.2);
+			tween.scaleTo(0);
+			tween.fadeTo(0);
+			tween.moveTo(heroSprite.x, heroSprite.y);
+			tween.onComplete = removeEmotionImage;
+			tween.onCompleteArgs = [emotionSpawn];
+		
+			Starling.juggler.add(tween);
+		}
+		
+		//emotionSpawn.
+		emotionViews.splice(data["nr"], 1);
+	}
+	
+	private function removeEmotionImage(emotion:Image):void 
+	{
+		elementHolder.removeChild(emotion);
 	}
 	
 	private function handleEmotionSpawn(emotionData:EmotionData):void {
 		
 		var emotionSpawn:Image = new Image(emotionTextures[emotionData.emotionId]);
-		elementHolder.addChild(emotionSpawn);
+		elementHolder.addChildAt(emotionSpawn,0);
 		emotionSpawn.x = emotionData.x;
 		emotionSpawn.y = emotionData.y;
 		

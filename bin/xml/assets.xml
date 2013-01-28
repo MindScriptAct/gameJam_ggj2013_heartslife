@@ -36,6 +36,7 @@
 		<file assetId="heart_death" fileName="heart_death.mp3" permanent="true"/>
 		<file assetId="heart_beep" fileName="heart_beep.mp3" permanent="true"/>
 		<file assetId="back_music" fileName="back_music.mp3" permanent="true"/>
+		<file assetId="heart_splash" fileName="heart_splash.mp3" permanent="true"/>
 	</path>
 	
 	<!-- EXAMPLE	
