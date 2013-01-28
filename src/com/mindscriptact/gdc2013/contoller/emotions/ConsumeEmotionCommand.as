@@ -8,6 +8,8 @@ import com.mindscriptact.gdc2013.model.emotian.EmotionData;
 import com.mindscriptact.gdc2013.model.emotian.EmotionProxy;
 import com.mindscriptact.gdc2013.model.game.GameProxy;
 import com.mindscriptact.gdc2013.model.hero.HeroProxy;
+import com.mindscriptact.gdc2013.view.main.MainMediator;
+import flash.media.SoundTransform;
 import org.mvcexpress.mvc.Command;
 import org.mvcexpress.mvc.PooledCommand;
 
@@ -39,12 +41,16 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		
 		// register history
 		consumeHystoryProxy.rememberEmotion(emotion.emotionId, emotion.strength > 0);
+		
 		// TODO ... check for score..
 		var comboSize:int = consumeHystoryProxy.getHystoryChain();
 		if (comboSize > emotionConfig.comboStarts) {
 			gameProxy.increaseScore((comboSize-emotionConfig.comboStarts) * emotionConfig.comboScores);
 		}
 		
+		
+		if (MainMediator.currentScreen == ScreenIds.GAME)
+			AssetLibrary.playMP3("eat", 0,0, new SoundTransform(0.4));
 		//emotionProxy.removeAll();
 		
 		// change life

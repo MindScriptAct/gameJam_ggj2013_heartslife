@@ -1,6 +1,7 @@
 package com.mindscriptact.gdc2013.engine.tasks {
 import com.mindscriptact.gdc2013.model.config.data.HeroConfigVO;
 import com.mindscriptact.gdc2013.model.hero.HeroData;
+import com.mindscriptact.gdc2013.view.game.GameMediator;
 import flash.ui.Keyboard;
 import flash.utils.Dictionary;
 import org.mvcexpress.live.Task;
@@ -15,8 +16,8 @@ public class MoveHeroTask extends Task {
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO_DATA')]
 	public var heroData:HeroData;
 	
-	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.KEYBOARD_REGISTRY')]
-	public var keyDictionary:Dictionary;
+	//[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.KEYBOARD_REGISTRY')]
+	//public var keyDictionary:Dictionary;
 	
 	[Inject(constName='com.mindscriptact.gdc2013.constants::ProvideId.HERO')]
 	public var heroView:Sprite;
@@ -26,35 +27,21 @@ public class MoveHeroTask extends Task {
 	
 	private var speedEasing:Number = 0.5;
 	
-	override public function run():void {
+	
+	public static var directionX:Number = 0;
+	public static var directionY:Number = 0;
 		
-		if (keyDictionary[Keyboard.UP] as Boolean) {
-			heroData.speedY += (-heroConfig.moveSpeed - heroData.speedY) * speedEasing;
-				//heroData.y -= heroConfig.moveSpeed;
-		}
-		if (keyDictionary[Keyboard.DOWN] as Boolean) {
-			heroData.speedY += (heroConfig.moveSpeed - heroData.speedY) * speedEasing;
-				//heroData.y += heroConfig.moveSpeed;
-		}
-		if (!(keyDictionary[Keyboard.UP] as Boolean) && !(keyDictionary[Keyboard.DOWN] as Boolean)) {
-			heroData.speedY *= speedEasing;
-			if (Math.abs(heroData.speedY) <= 0.05)
-				heroData.speedY = 0;
-		}
+	override public function run():void 
+	{
 		
-		if (keyDictionary[Keyboard.LEFT] as Boolean) {
-			heroData.speedX += (-heroConfig.moveSpeed - heroData.speedX) * speedEasing;
-				//heroData.x -= heroConfig.moveSpeed;
-		}
-		if (keyDictionary[Keyboard.RIGHT] as Boolean) {
-			heroData.speedX += (heroConfig.moveSpeed - heroData.speedX) * speedEasing;
-				//heroData.x += heroConfig.moveSpeed;
-		}
-		if (!(keyDictionary[Keyboard.LEFT] as Boolean) && !(keyDictionary[Keyboard.RIGHT] as Boolean)) {
-			heroData.speedX *= speedEasing;
-			if (Math.abs(heroData.speedX) <= 0.05)
-				heroData.speedX = 0;
-		}
+		heroData.speedX += (heroConfig.moveSpeed * directionX - heroData.speedX) * speedEasing;
+		heroData.speedY += (heroConfig.moveSpeed * directionY - heroData.speedY) * speedEasing;
+		
+		if (Math.abs(heroData.speedX) <= 0.05)
+			heroData.speedX = 0;		
+		
+		if (Math.abs(heroData.speedY) <= 0.05)
+			heroData.speedY = 0;		
 		
 		var prevX:Number = heroData.x;
 		var prevY:Number = heroData.y;
@@ -75,6 +62,11 @@ public class MoveHeroTask extends Task {
 			heroData.speedX = 0;
 			heroData.speedY = 0;
 		}
+		
+		//if (GameMediator.heroSprite != null)
+		//{
+		//	GameMediator.heroSprite.rotation = Math.atan2(heroData.speedX, heroData.speedY);
+		//}
 		
 		heroView.x = heroData.x;
 		heroView.y = heroData.y
