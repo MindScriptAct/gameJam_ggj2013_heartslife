@@ -155,7 +155,7 @@ public class CardioChart extends Sprite {
 			AssetLibrary.playMP3("heart2", 0, 0, _soundTransform);
 			
 			if (heroImage != null) {
-				var imageTween:Tween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
+				imageTween = new Tween(heroImage, delay / 2000, Transitions.EASE_IN_OUT);
 				imageTween.scaleTo(0.9);
 				Starling.juggler.add(imageTween);
 			}
