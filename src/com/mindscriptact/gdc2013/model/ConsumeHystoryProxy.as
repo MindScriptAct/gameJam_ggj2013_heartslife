@@ -36,6 +36,8 @@ public class ConsumeHystoryProxy extends Proxy {
 			for (var i:int = 0; i < isPositives.length; i++) {
 				if (chainMood == isPositives[i]) {
 					chainCount++;
+				} else {
+					break;
 				}
 			}
 		}
