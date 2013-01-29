@@ -1,6 +1,8 @@
 package com.mindscriptact.gdc2013.contoller.emotions {
+import com.gamua.flox.Flox;
 import com.mindscriptact.assetLibrary.AssetLibrary;
 import com.mindscriptact.gdc2013.constants.ScreenIds;
+import com.mindscriptact.gdc2013.Main;
 import com.mindscriptact.gdc2013.messages.Message;
 import com.mindscriptact.gdc2013.model.config.data.EmotionsConfigVO;
 import com.mindscriptact.gdc2013.model.ConsumeHystoryProxy;
@@ -45,12 +47,11 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		// TODO ... check for score..
 		var comboSize:int = consumeHystoryProxy.getHystoryChain();
 		if (comboSize > emotionConfig.comboStarts) {
-			gameProxy.increaseScore((comboSize-emotionConfig.comboStarts) * emotionConfig.comboScores);
+			gameProxy.increaseScore((comboSize - emotionConfig.comboStarts) * emotionConfig.comboScores);
 		}
 		
-		
 		if (MainMediator.currentScreen == ScreenIds.GAME)
-			AssetLibrary.playMP3("eat", 0,0, new SoundTransform(0.4));
+			AssetLibrary.playMP3("eat", 0, 0, new SoundTransform(0.4));
 		//emotionProxy.removeAll();
 		
 		// change life
@@ -59,13 +60,14 @@ public class ConsumeEmotionCommand extends PooledCommand {
 		// game over check.
 		var heartState:int = heroProxy.getHeartState();
 		var life:int = heroProxy.getHeroConfig().life;
-		if (heartState >= life) {
+		if (heartState >= life || heartState <= -life) {
+			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
 			
-			// TODO !!! BUUUG... is called even after stage ends... WHY....
-			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
-		}
-		if (heartState <= -life) {
-			sendMessage(Message.SHOW_SCREEN, ScreenIds.GAMEOVER);
+			if (Main.FLOX_ENABLED) {
+				var score:int = gameProxy.getScore();
+				Flox.postScore("Top-10-gjj-heartslife", score, "Guest");
+			}
+			
 		}
 		
 		emotionProxy.removeEmotion(emotion);

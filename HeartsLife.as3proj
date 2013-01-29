@@ -4,7 +4,7 @@
   <output>
     <movie outputType="Application" />
     <movie input="" />
-    <movie path="bin\gdc2013.swf" />
+    <movie path="bin\ggj2013.swf" />
     <movie fps="60" />
     <movie width="1280" />
     <movie height="960" />
@@ -52,6 +52,7 @@
   <!-- SWC Libraries -->
   <libraryPaths>
     <element path="lib\uiLib.swc" />
+    <element path="lib\flox-as3.swc" />
   </libraryPaths>
   <!-- External Libraries -->
   <externalLibraryPaths>
